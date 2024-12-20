@@ -1,0 +1,107 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Staatliches&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Remove Default Margins and Padding */
+html, body, div, span, iframe,
+h1, h2, h3, h4, h5, h6, p, img, embed, footer, header,
+menu, nav, section, audio, video, ul, li {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 Display Settings */
+footer, header, menu, nav, section, main {
+    display: block;
+}
+
+/* Set Base Line Height */
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+/* Global font styles */
+ h1, h2, h3 {
+     font-family: 'Staatliches', 'Courier New', cursive;
+     font-weight: 700;
+ }
+
+ h1 {
+     font-size: 120px;
+     line-height: 1;
+ }
+
+ h2 {
+     font-size: 80px;
+     line-height: 1.2;
+ }
+
+ h3 {
+     font-size: 32px;
+     line-height: 1.3;
+ }
+
+ .font__display {
+     font-size: 48px;
+     line-height: 1.2;
+ }
+
+ .font__display_second {
+     font-size: 24px;
+     line-height: 1.5;
+ }
+
+/* List Style Reset */
+ol, ul {
+    list-style: none;
+}
+
+/* Link Reset */
+a {
+    text-decoration: underline;
+    color: inherit;
+    background-color: transparent;
+    font-size: 18px;
+    line-height: 1;
+}
+
+/* Button Reset */
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    appearance: none;
+}
+button {
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 600;
+}
+
+/* Image Reset */
+img {
+    border-style: none;
+    max-width: 100%;
+    height: auto;
+}
+

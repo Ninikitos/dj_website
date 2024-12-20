@@ -1,17 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="Starter Template">
-    <meta name="author" content="Nick Ilin">
-    <title>Title</title>
-</head>
-<body>
-<main>
-    <h1>Welcome to My Website</h1>
-</main>
+{% extends 'base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'main/css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1>LIVE TIktok DJ</h1>
+            <p>
+                Live, loud, and a little unexpected. DJ Destruct brings
+                chill R&B vibes with a side of entertainment—straight
+                from Miami’s neon-lit nights.
+            </p>
+            <p>
+
+                <a href="#">Watch on tiktok</a>
+            </p>
+            <p>
+                <a href="#">Book</a>
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main>
+        <section>
+            <h2>About Us</h2>
+            <p>We are dedicated to providing top-quality services to our clients.</p>
+        </section>
+
+        <section>
+            <h2>Our Services</h2>
+            <ul>
+                <li>Web Development</li>
+                <li>App Development</li>
+                <li>SEO Optimization</li>
+            </ul>
+        </section>
+    </main>
+{% endblock %}

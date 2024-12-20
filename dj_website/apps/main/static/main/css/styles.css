@@ -1,0 +1,14 @@
+:root {
+    --main-primary: #F23038;
+    --main-secondary: #2E22C2;
+    --main-dark: #1C1819;
+    --main--light: #FFFFFF;
+    --supportive-one: #524F4F;
+    --supportive-two: #8F3F42;
+    --supportive-three: #8A82EE;
+}
+
+h1 {
+    color: var(--main-primary);
+    font-size: 120px;
+}
