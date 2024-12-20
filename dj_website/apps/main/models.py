@@ -1,11 +1,31 @@
+from django.core.validators import URLValidator
+from django.core.exceptions import ValidationError
 from django.db import models
 
 
+def social_media_link_validator(url: str) -> None:
+    """Custom validator to ensure only specific social media URLs are allowed."""
+    allowed_socials = ['youtube.com', 'tiktok.com', 'mixcloud.com']
+    validator = URLValidator(schemes=['http', 'https'])
+    try:
+        # Validate the URL format first
+        validator(url)
+        # Ensure at least one allowed social media link is present
+        if not any(social in url.lower() for social in allowed_socials):
+            raise ValidationError("Only YouTube, TikTok, and MixCloud URLs are allowed.")
+    except ValidationError:
+        raise ValidationError("Enter a valid social media URL.")
+
+
 class MainPage(models.Model):
-    hero_watch_tiktok = models.URLField()
-    general_booking = models.TextField()
-    party_booking = models.TextField()
-    live_booking = models.TextField()
+    hero_watch_tiktok = models.URLField(
+        blank=True,
+        validators=[social_media_link_validator],
+        help_text="Only YouTube, TikTok, and MixCloud links are allowed."
+    )
+    general_booking = models.URLField(blank=True)
+    party_booking = models.URLField(blank=True)
+    live_booking = models.URLField(blank=True)
 
     def __str__(self):
         return "Main Page Content"
@@ -16,8 +36,8 @@ class MainPage(models.Model):
 
 
 class MusicSample(models.Model):
-    title = models.CharField(max_length=255)
-    audio_file = models.FileField(upload_to="music_samples/")
+    title = models.CharField(blank=True, max_length=255)
+    audio_file = models.FileField(blank='', upload_to="music_samples/")
 
     def __str__(self):
         return self.title
@@ -28,8 +48,12 @@ class MusicSample(models.Model):
 
 
 class YoutubeLink(models.Model):
-    thumbnail = models.ImageField(upload_to="youtube_thumbnails/")
-    link = models.URLField()
+    thumbnail = models.ImageField(blank='', upload_to="youtube_thumbnails/")
+    link = models.URLField(
+        blank=True,
+        validators=[social_media_link_validator],
+        help_text="Only YouTube, TikTok, and MixCloud links are allowed."
+    )
 
     def __str__(self):
         return f"YouTube Link to {self.link}"
@@ -40,9 +64,13 @@ class YoutubeLink(models.Model):
 
 
 class MusicLink(models.Model):
-    title = models.CharField(max_length=255)
-    photo = models.ImageField(upload_to="music_links/")
-    link = models.URLField()
+    title = models.CharField(blank=True, max_length=255)
+    photo = models.ImageField(blank=True, upload_to="music_links/")
+    link = models.URLField(
+        blank=True,
+        validators=[social_media_link_validator],
+        help_text="Only YouTube, TikTok, and MixCloud links are allowed."
+    )
 
     def __str__(self):
         return self.title
@@ -52,31 +80,27 @@ class MusicLink(models.Model):
         verbose_name_plural = "Music Links"
 
 
-class Shop(models.Model):
-    title = models.CharField(max_length=255)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    thumbnail_photo = models.ImageField(upload_to="shop_thumbnails/")
-    preview_photo = models.ImageField(upload_to="shop_previews/")
+class Product(models.Model):
+    title = models.CharField(blank=True, max_length=255)
+    price = models.DecimalField(blank=True, max_digits=3, decimal_places=2)
+    thumbnail_photo = models.ImageField(blank=True, upload_to="shop_thumbnails/")
+    preview_photo = models.ImageField(blank=True, upload_to="shop_previews/")
     link = models.URLField()
 
     def __str__(self):
         return self.title
 
     class Meta:
-        verbose_name = "Shop Item"
-        verbose_name_plural = "Shop Items"
+        verbose_name = "Product Item"
+        verbose_name_plural = "Product Items"
 
 
 class ProductImage(models.Model):
-    shop = models.ForeignKey(Shop, related_name="product_images", on_delete=models.CASCADE)
-    image_1 = models.ImageField(upload_to="product_images/", blank=True, null=True)
-    image_2 = models.ImageField(upload_to="product_images/", blank=True, null=True)
-    image_3 = models.ImageField(upload_to="product_images/", blank=True, null=True)
-    image_4 = models.ImageField(upload_to="product_images/", blank=True, null=True)
-    image_5 = models.ImageField(upload_to="product_images/", blank=True, null=True)
+    product = models.ForeignKey(Product, related_name="product_images", on_delete=models.CASCADE)
+    image = models.ImageField(blank=True, upload_to="product_images/")
 
     def __str__(self):
-        return f"Images for {self.shop.title}"
+        return f"Images for {self.product.title}"
 
     class Meta:
         verbose_name = "Product Image"
