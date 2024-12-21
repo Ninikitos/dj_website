@@ -12,3 +12,41 @@ h1 {
     color: var(--main-primary);
     font-size: 120px;
 }
+
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.preloader h2 {
+    color: var(--main--light);
+    font-size: 3rem;
+    margin-bottom: 20px;
+    transform: scale(1);
+    opacity: 0;
+}
+
+.preloader__img-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: auto;
+    overflow: hidden;
+}
+
+.preloader__img-wrapper img {
+    width: 100%;
+    height: auto;
+    transform: translateY(-100%);
+}
