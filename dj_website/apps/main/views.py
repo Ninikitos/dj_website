@@ -4,7 +4,7 @@ from .models import *
 
 
 def index(request):
-    main_page_urls = MainPage.objects.all()
+    main_page_urls = MainPage.objects.first()
     music_samples = MusicSample.objects.all()
     youtube_content = YoutubeContent.objects.all()
     music_content = MusicContent.objects.all()
