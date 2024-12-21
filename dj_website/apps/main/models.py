@@ -1,4 +1,4 @@
-from django.core.validators import URLValidator
+from django.core.validators import URLValidator, MinValueValidator
 from django.core.exceptions import ValidationError
 from django.db import models
 
@@ -31,8 +31,7 @@ class MainPage(models.Model):
         return "Main Page Content"
 
     class Meta:
-        verbose_name = "Main Page"
-        verbose_name_plural = "Main Pages"
+        verbose_name_plural = "Main Page"
 
 
 class MusicSample(models.Model):
@@ -47,7 +46,7 @@ class MusicSample(models.Model):
         verbose_name_plural = "Music Samples"
 
 
-class YoutubeLink(models.Model):
+class YoutubeContent(models.Model):
     thumbnail = models.ImageField(blank='', upload_to="youtube_thumbnails/")
     link = models.URLField(
         blank=True,
@@ -56,14 +55,14 @@ class YoutubeLink(models.Model):
     )
 
     def __str__(self):
-        return f"YouTube Link to {self.link}"
+        return f"YouTube Content for {self.link}"
 
     class Meta:
-        verbose_name = "YouTube Link"
-        verbose_name_plural = "YouTube Links"
+        verbose_name = "YouTube Content"
+        verbose_name_plural = "YouTube Content"
 
 
-class MusicLink(models.Model):
+class MusicContent(models.Model):
     title = models.CharField(blank=True, max_length=255)
     photo = models.ImageField(blank=True, upload_to="music_links/")
     link = models.URLField(
@@ -77,14 +76,17 @@ class MusicLink(models.Model):
 
     class Meta:
         verbose_name = "Music Link"
-        verbose_name_plural = "Music Links"
+        verbose_name_plural = "Music Content"
 
 
 class Product(models.Model):
     title = models.CharField(blank=True, max_length=255)
-    price = models.DecimalField(blank=True, max_digits=3, decimal_places=2)
-    thumbnail_photo = models.ImageField(blank=True, upload_to="shop_thumbnails/")
-    preview_photo = models.ImageField(blank=True, upload_to="shop_previews/")
+    price = models.DecimalField(
+        blank=True,
+        max_digits=5,
+        decimal_places=2,
+        validators=[MinValueValidator(0.00)])
+    thumbnail_photo = models.ImageField(blank=True, upload_to="product_thumbnails/")
     link = models.URLField()
 
     def __str__(self):
