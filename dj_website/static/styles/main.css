@@ -18,8 +18,6 @@ menu, nav, section, audio, video, ul, li {
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
 }
 
@@ -28,45 +26,57 @@ footer, header, menu, nav, section, main {
     display: block;
 }
 
+main {
+    /*position: relative;*/
+}
+
 /* Set Base Line Height */
 body {
+    position: relative;
     font-family: 'Inter', Arial, sans-serif;
     font-size: 16px;
     line-height: 1.5;
     font-weight: 400;
-    overflow: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    background-color: var(--supportive-one);
+}
+
+/* Hides scrollbar in Chrome, Edge, Safari */
+body::-webkit-scrollbar {
+    display: none;
 }
 
 /* Global font styles */
- h1, h2, h3 {
-     font-family: 'Staatliches', 'Courier New', cursive;
-     font-weight: 700;
- }
+h1, h2, h3 {
+    font-family: 'Staatliches', 'Courier New', cursive;
+    font-weight: 700;
+}
 
- h1 {
-     font-size: 120px;
-     line-height: 1;
- }
+h1 {
+    font-size: 120px;
+    line-height: 1;
+}
 
- h2 {
-     font-size: 80px;
-     line-height: 1.2;
- }
+h2 {
+    font-size: 80px;
+    line-height: 1.2;
+}
 
- h3 {
-     font-size: 32px;
-     line-height: 1.3;
- }
+h3 {
+    font-size: 32px;
+    line-height: 1.3;
+}
 
- .font__display {
-     font-size: 48px;
-     line-height: 1.2;
- }
+.font__display {
+    font-size: 48px;
+    line-height: 1.2;
+}
 
- .font__display_second {
-     font-size: 24px;
-     line-height: 1.5;
- }
+.font__display_second {
+    font-size: 24px;
+    line-height: 1.5;
+}
 
 /* List Style Reset */
 ol, ul {
@@ -78,8 +88,12 @@ a {
     text-decoration: underline;
     color: inherit;
     background-color: transparent;
-    font-size: 18px;
     line-height: 1;
+}
+
+.link__reset {
+    position: relative;
+    text-decoration: none;
 }
 
 /* Button Reset */
@@ -93,6 +107,7 @@ button, input, select, textarea {
     background: none;
     appearance: none;
 }
+
 button {
     font-size: 18px;
     line-height: 1;
@@ -104,5 +119,28 @@ img {
     border-style: none;
     max-width: 100%;
     height: auto;
+}
+
+/* Link styles */
+.link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0) translateY(0px);
+    height: 0.1em;
+    bottom: 0;
+    left: 0;
+    background: currentcolor;
+    transform-origin: bottom right;
+    transition: transform 0.4s ease-out;
+}
+
+.link:hover {
+    cursor: pointer;
+}
+
+.link:hover::after {
+    transform: scaleX(1) translateY(4px);
+    transform-origin: bottom left;
 }
 

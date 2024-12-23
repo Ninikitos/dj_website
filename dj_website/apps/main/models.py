@@ -63,7 +63,7 @@ class YoutubeContent(models.Model):
 
 
 class MusicContent(models.Model):
-    title = models.CharField(blank=True, max_length=255)
+    title = models.CharField(blank=True, max_length=35)
     photo = models.ImageField(blank=True, upload_to="music_links/")
     link = models.URLField(
         blank=True,
