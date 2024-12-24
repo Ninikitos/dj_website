@@ -10,7 +10,20 @@
 
 h1 {
     color: var(--main-primary);
-    font-size: 120px;
+}
+
+.main-button {
+    padding: 14px 23px;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 5px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.section__text {
+    font-size: 24px;
+    line-height: 1.5;
 }
 
 /* Preloader */
@@ -53,6 +66,10 @@ h1 {
 }
 
 /* Hero */
+.navbar {
+    transition: transform 0.4s ease-in-out;
+}
+
 .nav__container {
     padding-top: 40px;
     z-index: 3;
@@ -186,7 +203,7 @@ p.hero__music-title {
 }
 
 /* Navigation */
-nav ul{
+nav ul {
     display: flex;
     justify-content: space-between;
     align-items: start;
@@ -219,10 +236,17 @@ nav ul{
     width: 100%;
 }
 
+.header__menu-wrapper {
+    padding: 13px 19px;
+    border-radius: 10px;
+    background-color: var(--main-dark);
+    clip-path: inset(0 0 100% 0);
+}
+
 .header__menu {
+    color: var(--main-primary);
     line-height: 1;
     position: relative;
-    z-index: 0;
     clip-path: inset(100% 0 0 0);
 }
 
@@ -257,7 +281,7 @@ header {
     justify-content: start;
 }
 
-.menu__navigation{
+.menu__navigation {
     display: flex;
     flex-direction: column;
 }
@@ -323,33 +347,161 @@ header {
 }
 
 .live-stream__subtitle {
-    max-width: 100px;
+    display: inline-block;
+    max-width: 350px;
 }
 
 .live-stream__text {
-    font-size: 24px;
-    line-height: 1.5;
+    margin-bottom: 32px;
 }
 
-@media (min-width: 1200px) {
+.live-stream__cards > div:first-child {
+    margin-bottom: 32px;
+}
 
+.live-stream__card {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--main-dark);
+    color: var(--main-primary);
+    border-radius: 10px;
+    padding: 30px;
+    transform-origin: right top;
+    clip-path: inset(0 0 100% 0);
+    transition: color, background-color .4s ease-in-out;
+}
+
+.live-stream__card-title {
+    font-size: 42px;
+    line-height: 1.2;
+    font-family: 'Inter', Arial, sans-serif;
+    margin-bottom: 90px;
+    transition: color .4s ease-in-out;
+}
+
+.live-stream__card-text {
+    margin-bottom: 18px;
+    transition: color .4s ease-in-out;
+}
+
+.card-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.live-stream__image {
+    max-width: none;
+    border-radius: 10px;
+    transform: scale(.5);
+    transform-origin: right top;
+    transition: transform .4s ease-in-out;
+}
+
+.live-stream__card:hover .live-stream__image {
+    transform: scale(.7);
+    transform-origin: right top;
+    transition: transform .4s ease-in-out;
+}
+
+.live-stream__card:hover {
+    color: var(--main-dark);
+    background-color: var(--main-primary);
+    transition: color, background-color .4s ease-in-out;
+}
+
+.card-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.live-stream__buttons {
+    display: flex;
+    gap: 24px;
+}
+
+.live-stream__card:hover .live-stream__cal {
+    border: 1px solid var(--main-light);
+    color: var(--main-light);
+}
+
+.live-stream__cal {
+    display: inline-block;
+    padding: 14px 23px;
+    color: var(--main-primary);
+    transition: color .2s ease-in-out;
+    border: 1px solid var(--main-primary);
+}
+
+.live-stream__card:hover .live-stream__cal:hover {
+    background-color: var(--main-secondary);
+    color: var(--main-light);
+    border: 1px solid var(--main-secondary);
+    transition: color, background-color .2s ease-in-out;
+}
+
+.live-stream__offline {
+    display: inline-block;
+    cursor: not-allowed;
+    color: var(--supportive-one);
+    background-color: var(--supportive-two);
+}
+
+@media (max-width: 1200px) {
+    /* Globals */
+    .main-button {
+        padding: 10px 19px;
+        font-size: 16px;
+    }
+
+    /* Live stream */
+    .live-stream__card-title {
+        font-size: 32px;
+    }
 }
 
 @media (max-width: 991.98px) {
+    /* Hero */
+    p.hero__music-title {
+        font-size: 12px;
+    }
+
+    /* Menu */
     .menu__avatar {
         width: 150px;
     }
 
-    p.hero__music-title {
-        font-size: 12px;
+    /* Live stream */
+    .live-stream__card {
+        flex-direction: column-reverse;
+    }
+
+    .live-stream__card-title {
+        margin-bottom: 32px;
+    }
+
+    .card-right {
+        margin-bottom: 32px;
+        justify-content: flex-start;
+    }
+
+    .live-stream__image {
+        max-width: 150px;
+        border-radius: 5px;
+        transform: scale(1);
+        transform-origin: left top;
+        transition: none;
+    }
+
+    .live-stream__card:hover .live-stream__image {
+        transform: scale(1);
+        transform-origin: left top;
+        transition: transform .4s ease-in-out;
     }
 }
 
 @media (max-width: 767.98px) {
-    .menu__avatar {
-        width: 150px;
-    }
-
+    /* Hero */
     .hero::before {
         background-color: rgba(0, 0, 0, .3);
     }
@@ -365,6 +517,11 @@ header {
 
     .hero__content-text {
         margin-top: 24px;
+    }
+
+     /* Menu */
+    .menu__avatar {
+        width: 150px;
     }
 
     .socials {
@@ -384,6 +541,35 @@ header {
 }
 
 @media (max-width: 575.98px) {
+    /* Globals */
+    .section__text {
+        font-size: 20px;
+        line-height: 1.5;
+    }
+
+    /* Hero */
+    .hero {
+        margin-bottom: 48px;
+    }
+
+    .header__menu {
+        color: var(--main-primary);
+    }
+
+    .hero__wrapper {
+        height: 80vh;
+        padding: 0 12px;
+    }
+
+    .hero__music-section {
+        display: none;
+    }
+
+    .hero__content h1 {
+        font-size: 60px;
+    }
+
+    /* Menu */
     .menu {
         padding-bottom: 12px;
     }
@@ -400,22 +586,21 @@ header {
         padding-top: 62px;
     }
 
-    .header__menu {
-        color: var(--main-primary);
+    /* Live stream */
+    .live-stream__title {
+        margin-bottom: 0;
     }
 
-    .hero__wrapper {
-        height: 90vh;
-        padding: 0 12px;
+    .live-stream__subtitle {
+        margin-bottom: 18px;
     }
 
-    .hero__music-section {
-        display: none;
+    .live-stream__card-title {
+        font-size: 24px;
+        margin-bottom: 18px;
     }
 
-    .hero__content h1 {
-        font-size: 60px;
-    }
+
 }
 
 

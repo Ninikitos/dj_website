@@ -7,12 +7,12 @@
 
 {% block content %}
     <!-- Preloader -->
-    <div class="preloader">
-        <h2>DJ DESTRUCT 305</h2>
-        <div class="preloader__img-wrapper">
-            <img src="{% static 'main/images/decor/vynil.png' %}" alt="black male portrait">
-        </div>
-    </div>
+    {#    <div class="preloader">#}
+    {#        <h2>DJ DESTRUCT 305</h2>#}
+    {#        <div class="preloader__img-wrapper">#}
+    {#            <img src="{% static 'main/images/decor/vynil.png' %}" alt="black male portrait">#}
+    {#        </div>#}
+    {#    </div>#}
 
     <!-- Header Section -->
     <header>
@@ -79,7 +79,8 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="social__item social__mix-cloud" href="https://www.mixcloud.com/DJDestruct305"
+                                        <a class="social__item social__mix-cloud"
+                                           href="https://www.mixcloud.com/DJDestruct305"
                                            target="_blank">
                                             <svg width="52" height="17" viewBox="0 0 52 17" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
@@ -109,8 +110,8 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li>
-                                <h3 class="header__menu link">Menu</h3>
+                            <li class="header__menu-wrapper">
+                                <h3 class="header__menu link link__reset">Menu</h3>
                             </li>
                         </ul>
                     </div>
@@ -151,11 +152,13 @@
                             </p>
                             <div class="hero__links">
                                 <div>
-                                    <a class="link link__reset hero__link-tiktok" href="{{ main_page_urls.hero_watch_tiktok }}"
+                                    <a class="link link__reset hero__link-tiktok"
+                                       href="{{ main_page_urls.hero_watch_tiktok }}"
                                        target="_blank">Watch on tiktok</a>
                                 </div>
                                 <div>
-                                    <a class="link link__reset hero__link-book" href="{{ main_page_urls.general_booking }}"
+                                    <a class="link link__reset hero__link-book"
+                                       href="{{ main_page_urls.general_booking }}"
                                        target="_blank">Book</a>
                                 </div>
                             </div>
@@ -167,22 +170,97 @@
         <section class="live-stream">
             <div class="container">
                 <div class="row">
-                    <div class="col-5">
+                    <div class="col-sm-12 col-md-5">
                         <h2 class="live-stream__title">Live stream</h2>
                         <span class="live-stream__subtitle">
                             No stereotypes, no fluff—just good vibes,
                             great music, and a whole lot of fun.
                         </span>
                     </div>
-                    <div class="col-7">
-                        <p class="live-stream__text">
+                    <div class="col-sm-12 col-md-7">
+                        <p class="section__text live-stream__text">
                             Forget boring playlists or DJs that just press play.
                             DJ Destruct’s TikTok live streams are the real deal—engaging,
                             entertaining, and full of personality.
                         </p>
+                        <div class="live-stream__cards">
+                            <div class="live-stream__card">
+                                <div class="card-left col-sm-12 col-lg-7">
+                                    <h4 class="live-stream__card-title">Wine Down Wednesday<br>8 PM EST</h4>
+                                    <div>
+                                        <p class="live-stream__card-text">
+                                            Need to unwind midweek? Let DJ Destruct
+                                            serve up the smoothest R&B music mixes
+                                            while you sip on your favorite drink.
+                                        </p>
+                                        <div class="live-stream__buttons">
+                                            <a class="main-button live-stream__cal"
+                                               href="{% url 'calendar_event' 'wine_down_wednesday' %}">Add to cal</a>
+                                            <a class="main-button live-stream__offline" href="#">Offline</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-right col-sm-12 col-lg-5">
+                                    <img class="live-stream__image"
+                                         src="{% static 'main/images/main/winedown_wed.jpg' %}"
+                                         alt="black male wearing NY baseball hat">
+                                </div>
+                            </div>
+                            <div class="live-stream__card">
+                                <div class="card-left col-sm-12 col-lg-7">
+                                    <h4 class="live-stream__card-title">R&B Sundays<br>9 PM EST</h4>
+                                    <div>
+                                        <p class="live-stream__card-text">
+                                            Sunday scares? Not here. Chill out with
+                                            soulful beats and a stream that feels
+                                            like a party with your favorite people.
+                                        </p>
+                                        <div class="live-stream__buttons">
+                                            <a class="main-button live-stream__cal"
+                                               href="{% url 'calendar_event' 'rnb_sundays' %}">Add to cal</a>
+                                            <a class="main-button live-stream__offline" href="#">Offline</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-right col-sm-12 col-lg-5">
+                                    <img class="live-stream__image"
+                                         src="{% static 'main/images/main/rn_sunday.jpg' %}"
+                                         alt="black male wearing NY baseball hat">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
+        <section>
+            <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@djdestruct305/video/7418910197537590558"
+                        data-video-id="7418910197537590558" style="max-width: 605px;min-width: 325px; background-color: #C6C2C2;">
+                <section><a target="_blank" title="@djdestruct305"
+                            href="https://www.tiktok.com/@djdestruct305?refer=embed">@djdestruct305</a> The vibe✨ is
+                    BACK! 🥵 Did you miss it? *Hit the yellow 🟡 👆🏽subscription button be part of my vibe* <a
+                            title="afterlastnight" target="_blank"
+                            href="https://www.tiktok.com/tag/afterlastnight?refer=embed">#afterlastnight</a> <a
+                            title="musicvideos" target="_blank"
+                            href="https://www.tiktok.com/tag/musicvideos?refer=embed">#musicvideos</a> <a
+                            title="musicvibes" target="_blank" href="https://www.tiktok.com/tag/musicvibes?refer=embed">#musicvibes</a>
+                    <a title="capcut" target="_blank" href="https://www.tiktok.com/tag/capcut?refer=embed">#CapCut</a>
+                    <a title="djdestruct305" target="_blank"
+                       href="https://www.tiktok.com/tag/djdestruct305?refer=embed">#djdestruct305</a> <a
+                            title="raneperformer" target="_blank"
+                            href="https://www.tiktok.com/tag/raneperformer?refer=embed">#raneperformer</a> <a
+                            title="djpioneer" target="_blank" href="https://www.tiktok.com/tag/djpioneer?refer=embed">#djpioneer</a>
+                    <a title="soulsonicforce" target="_blank"
+                       href="https://www.tiktok.com/tag/soulsonicforce?refer=embed">#soulsonicforce</a> <a
+                            title="brunomars" target="_blank" href="https://www.tiktok.com/tag/brunomars?refer=embed">#brunomars</a>
+                    <a title="purple" target="_blank" href="https://www.tiktok.com/tag/purple?refer=embed">#purple</a>
+                    <a title="blue" target="_blank" href="https://www.tiktok.com/tag/blue?refer=embed">#blue</a> <a
+                            title="black" target="_blank" href="https://www.tiktok.com/tag/black?refer=embed">#black</a>
+                    <a target="_blank" title="♬ original sound - DJ DESTRUCT305"
+                       href="https://www.tiktok.com/music/original-sound-7418910140495186718?refer=embed">♬ original
+                        sound - DJ DESTRUCT305</a></section>
+            </blockquote>
+            <script async src="https://www.tiktok.com/embed.js"></script>
         </section>
     </main>
 {% endblock %}

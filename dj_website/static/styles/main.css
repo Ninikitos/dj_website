@@ -133,6 +133,7 @@ img {
     background: currentcolor;
     transform-origin: bottom right;
     transition: transform 0.4s ease-out;
+    z-index: 3;
 }
 
 .link:hover {
@@ -140,7 +141,18 @@ img {
 }
 
 .link:hover::after {
-    transform: scaleX(1) translateY(4px);
+    transform: scaleX(1) translateY(0px);
     transform-origin: bottom left;
+    z-index: 3;
+}
+
+@media (max-width: 575.98px) {
+    h1 {
+        font-size: 60px;
+    }
+
+    h2 {
+        font-size: 42px;
+    }
 }
 

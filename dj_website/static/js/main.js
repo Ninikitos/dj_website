@@ -1,10 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
+    gsap.registerPlugin(ScrollTrigger);
+
     // Website Preloader
     const preloader = document.querySelector(".preloader");
     const preloaderText = document.querySelector(".preloader h2");
     const preloaderImage = document.querySelector(".preloader__img-wrapper img");
     const heroSocials = document.querySelector(".socials");
     const heroMenu = document.querySelector('.header__menu');
+    const heroMenuOpenWrapper = document.querySelector('.header__menu-wrapper');
     const heroTitle = document.querySelector('.hero__title');
     const heroSubTitle = document.querySelector('.hero__subtitle');
     const heroLinkTikTok = document.querySelector('.hero__link-tiktok');
@@ -14,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const tlPreloader = gsap.timeline();
     tlPreloader.to(preloaderText, {
-        duration: .5, opacity: 1, scale: 1.2, ease: "power2.out",
+        duration: 1.5, opacity: 1, scale: 1.2, ease: "power2.out",
     })
         .to(preloaderImage, {
             duration: 1.5, y: "0%", ease: "power2.out",
@@ -40,6 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .to(heroMenu, {
                 duration: 1, clipPath: 'inset(0% 0 0 0)', ease: 'power2.inOut',
+            }, '-=1')
+            .to(heroMenuOpenWrapper, {
+                duration: 1, clipPath: 'inset(0 0 0% 0)', ease: 'power2.inOut',
             }, '-=1')
             .to(heroTitle, {
                 duration: 1.5, clipPath: 'inset(0 0 0% 0)', ease: 'power2.inOut',

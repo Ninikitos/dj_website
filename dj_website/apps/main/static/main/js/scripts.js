@@ -1,3 +1,23 @@
+// Hide Navbar on scroll events
+// ====================================
+const navbar = document.querySelector(".navbar");
+let lastScrollY = window.scrollY;
+
+window.addEventListener("scroll", () => {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down - hide navbar
+        navbar.style.transform = "translateY(-100%)";
+    } else {
+        // Scrolling up - show navbar
+        navbar.style.transform = "translateY(0)";
+    }
+
+    lastScrollY = currentScrollY;
+});
+
+
 // Animate menu
 // ====================================
 const menuOpenBtn = document.querySelector('.header__menu');
@@ -46,6 +66,7 @@ menuCloseBtn.addEventListener('click', function () {
 
 });
 
+
 // Make Menu background move with mouse
 // ====================================
 // Default gradient center
@@ -72,3 +93,68 @@ document.addEventListener("mousemove", (e) => {
 
 // Start the animation
 animate();
+
+
+// Live stream card animation
+// ====================================
+const liveStreamCards = document.querySelectorAll(".live-stream__card");
+
+liveStreamCards.forEach((card) => {
+    const cardText = card.querySelector(".card-left");
+    const cardImage = card.querySelector(".live-stream__image");
+
+    const tlLiveStreamCard = gsap.timeline({
+        scrollTrigger: {
+            trigger: card,
+            start: "top 80%",
+            toggleActions: "play none none none",
+            markers: false,
+        },
+    });
+
+    // Reveal the card
+    tlLiveStreamCard.fromTo(
+        card,
+        {
+            clipPath: "inset(0 0 100% 0)",
+        },
+        {
+            clipPath: "inset(0 0 0% 0)",
+            duration: 2,
+            ease: "power2.out",
+        }
+    );
+
+    // Reveal text
+    tlLiveStreamCard.fromTo(
+        cardText,
+        {
+            clipPath: "inset(100% 0 0 0)",
+            opacity: 0,
+        },
+        {
+            clipPath: "inset(0% 0 0 0)",
+            opacity: 1,
+            duration: 1.2,
+            ease: "power2.out",
+        },
+        "<0.3"
+    );
+
+    // Reveal image
+    tlLiveStreamCard.fromTo(
+        cardImage,
+        {
+            clipPath: "inset(0 0 100% 0)", // Start fully hidden
+            opacity: 0,
+        },
+        {
+            clipPath: "inset(0 0 0% 0)", // Reveal image
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out",
+        },
+        "<0.3" // Slight overlap with the text animation
+    );
+});
+
