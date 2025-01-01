@@ -360,7 +360,6 @@ mm.add("(min-width: 768px)", () => {
             end: "+=1000",
             scrub: 1.5,
             pin: true,
-            markers: true,
             onRefresh: self => self.progress && self.animation.progress(1),
         },
     });
