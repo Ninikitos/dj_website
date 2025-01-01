@@ -1,10 +1,14 @@
+import pytz
+import asyncio
+
 from django.shortcuts import render
 from django.http import HttpResponse
+
 from icalendar import Calendar, Event
 from datetime import datetime, timedelta
-import pytz
 
 from .models import *
+from .utils import check_live_status, check_youtube_live
 
 
 def index(request):
@@ -14,12 +18,22 @@ def index(request):
     music_content = MusicContent.objects.all()
     products = Product.objects.all()
 
+    # Check live status for Wednesday and Sunday
+    username = 'olsonparker'
+    wednesday_live, sunday_live = check_live_status(username)
+    youtube_live_url = check_youtube_live()
+    youtube_live_url = ''
+
     context = {
         'main_page_urls': main_page_urls,
         'music_samples': music_samples,
         'youtube_content': youtube_content,
         'music_content': music_content,
-        'products': products
+        'products': products,
+        'wednesday_live': wednesday_live,
+        'sunday_live': sunday_live,
+        'username': username,
+        'youtube_live_url': youtube_live_url
     }
 
     return render(request, 'main/index.html', context)
@@ -91,3 +105,4 @@ def get_closest_sunday():
     # Calculate the next Sunday
     next_sunday = now + timedelta(days=days_until_sunday)
     return next_sunday.replace(hour=21, minute=0, second=0, microsecond=0)
+

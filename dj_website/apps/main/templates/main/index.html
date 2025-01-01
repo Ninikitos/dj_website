@@ -169,8 +169,8 @@
         </section>
         <section class="live-stream">
             <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 col-md-5">
+                <div class="title__sticky-wrapper row">
+                    <div class="title__sticky col-sm-12 col-md-5">
                         <h2 class="live-stream__title">Live stream</h2>
                         <span class="live-stream__subtitle">
                             No stereotypes, no fluff—just good vibes,
@@ -184,83 +184,179 @@
                             entertaining, and full of personality.
                         </p>
                         <div class="live-stream__cards">
-                            <div class="live-stream__card">
-                                <div class="card-left col-sm-12 col-lg-7">
-                                    <h4 class="live-stream__card-title">Wine Down Wednesday<br>8 PM EST</h4>
-                                    <div>
-                                        <p class="live-stream__card-text">
-                                            Need to unwind midweek? Let DJ Destruct
-                                            serve up the smoothest R&B music mixes
-                                            while you sip on your favorite drink.
-                                        </p>
-                                        <div class="live-stream__buttons">
-                                            <a class="main-button live-stream__cal"
-                                               href="{% url 'calendar_event' 'wine_down_wednesday' %}">Add to cal</a>
-                                            <a class="main-button live-stream__offline" href="#">Offline</a>
+                            <div class="live-stream__card-wrapper">
+                                <div class="live-stream__card">
+                                    <div class="card-left col-sm-12 col-lg-7">
+                                        <h4 class="live-stream__card-title">
+                                            Wine Down Wednesday<br>8 PM EST
+                                        </h4>
+                                        <div>
+                                            <p class="live-stream__card-text">
+                                                Need to unwind midweek? Let DJ Destruct
+                                                serve up the smoothest R&B music mixes
+                                                while you sip on your favorite drink.
+                                            </p>
                                         </div>
                                     </div>
+                                    <div class="card-right col-sm-12 col-lg-5">
+                                        <img class="live-stream__image"
+                                             src="{% static 'main/images/main/winedown_wed.jpg' %}"
+                                             alt="black male wearing NY baseball hat">
+                                    </div>
                                 </div>
-                                <div class="card-right col-sm-12 col-lg-5">
-                                    <img class="live-stream__image"
-                                         src="{% static 'main/images/main/winedown_wed.jpg' %}"
-                                         alt="black male wearing NY baseball hat">
+                                <div class="live-stream__buttons">
+                                    {% if wednesday_live %}
+                                        <a class="main-button live-stream__offline"
+                                           href="{% url 'calendar_event' 'wine_down_wednesday' %}"
+                                           disabled="true">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                 viewBox="0 0 26 26"
+                                                 fill="currentColor">
+                                                <path d="M9 3V1H7V3H3C2.44772 3 2 3.44772 2 4V20C2 20.5523 2.44772 21 3 21H21C21.5523 21 22 20.5523 22 20V4C22 3.44772 21.5523 3 21 3H17V1H15V3H9ZM4 10H20V19H4V10ZM4 5H7V6H9V5H15V6H17V5H20V8H4V5ZM9.87862 10.9644L12 13.0858L14.1212 10.9644L15.5355 12.3785L13.4142 14.5001L15.5354 16.6212L14.1213 18.0354L12 15.9143L9.87855 18.0354L8.46442 16.6211L10.5857 14.5001L8.46436 12.3785L9.87862 10.9644Z"></path>
+                                            </svg>
+                                            Add to cal
+                                        </a>
+                                        <a class="main-button live-stream__cal"
+                                           href="https://www.tiktok.com/@{{ username }}/live"
+                                           target="_blank">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                 viewBox="0 0 26 26"
+                                                 fill="currentColor">
+                                                <path d="M17 9.2L22.2133 5.55071C22.4395 5.39235 22.7513 5.44737 22.9096 5.6736C22.9684 5.75764 23 5.85774 23 5.96033V18.0397C23 18.3158 22.7761 18.5397 22.5 18.5397C22.3974 18.5397 22.2973 18.5081 22.2133 18.4493L17 14.8V19C17 19.5523 16.5523 20 16 20H2C1.44772 20 1 19.5523 1 19V5C1 4.44772 1.44772 4 2 4H16C16.5523 4 17 4.44772 17 5V9.2ZM17 12.3587L21 15.1587V8.84131L17 11.6413V12.3587ZM3 6V18H15V6H3Z"></path>
+                                            </svg>
+                                            Watch Live
+                                        </a>
+                                    {% else %}
+                                        <a class="main-button live-stream__cal"
+                                           href="{% url 'calendar_event' 'wine_down_wednesday' %}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                 viewBox="0 0 26 26" fill="currentColor">
+                                                <path d="M9 1V3H15V1H17V3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9ZM20 11H4V19H20V11ZM11 13V17H6V13H11ZM7 5H4V9H20V5H17V7H15V5H9V7H7V5Z"></path>
+                                            </svg>
+                                            Add to cal
+                                        </a>
+                                        <a class="main-button live-stream__offline" href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                 viewBox="0 0 26 26" fill="currentColor">
+                                                <path d="M17 18.4142L21.1925 22.6067L22.6067 21.1925L2.80769 1.39349L1.39348 2.80771L2.58579 4.00001H2C1.44772 4.00001 1 4.44773 1 5.00001V19C1 19.5523 1.44772 20 2 20H16C16.5523 20 17 19.5523 17 19V18.4142ZM15 16.4142V18H3V6.00001H4.58579L15 16.4142ZM23 18.0397C23 18.2517 22.875 18.4176 22.7083 18.4943L21 16.786V8.84133L17 11.6413V12.786L15 10.786V6.00001H10.214L8.21402 4.00001H16C16.5523 4.00001 17 4.44773 17 5.00001V9.20001L22.2133 5.55073C22.5447 5.31876 23 5.55583 23 5.96034V18.0397Z"></path>
+                                            </svg>
+                                            Offline
+                                        </a>
+                                    {% endif %}
                                 </div>
                             </div>
-                            <div class="live-stream__card">
-                                <div class="card-left col-sm-12 col-lg-7">
-                                    <h4 class="live-stream__card-title">R&B Sundays<br>9 PM EST</h4>
-                                    <div>
-                                        <p class="live-stream__card-text">
-                                            Sunday scares? Not here. Chill out with
-                                            soulful beats and a stream that feels
-                                            like a party with your favorite people.
-                                        </p>
-                                        <div class="live-stream__buttons">
-                                            <a class="main-button live-stream__cal"
-                                               href="{% url 'calendar_event' 'rnb_sundays' %}">Add to cal</a>
-                                            <a class="main-button live-stream__offline" href="#">Offline</a>
+                            <div style="position: relative;" class="live-stream__card-wrapper">
+                                <div class="live-stream__card">
+                                    <div class="card-left col-sm-12 col-lg-7">
+                                        <h4 class="live-stream__card-title">R&B Sundays<br>9 PM EST</h4>
+                                        <div>
+                                            <p class="live-stream__card-text">
+                                                Sunday scares? Not here. Chill out with
+                                                soulful beats and a stream that feels
+                                                like a party with your favorite people.
+                                            </p>
                                         </div>
                                     </div>
+                                    <div class="card-right col-sm-12 col-lg-5">
+                                        <img class="live-stream__image"
+                                             src="{% static 'main/images/main/rn_sunday.jpg' %}"
+                                             alt="black male wearing NY baseball hat">
+                                    </div>
                                 </div>
-                                <div class="card-right col-sm-12 col-lg-5">
-                                    <img class="live-stream__image"
-                                         src="{% static 'main/images/main/rn_sunday.jpg' %}"
-                                         alt="black male wearing NY baseball hat">
+                                <div class="live-stream__buttons">
+                                    {% if sunday_live %}
+                                        <a class="main-button live-stream__offline"
+                                           href="{% url 'calendar_event' 'rnb_sundays' %}"
+                                           disabled="true">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                 viewBox="0 0 26 26"
+                                                 fill="currentColor">
+                                                <path d="M9 3V1H7V3H3C2.44772 3 2 3.44772 2 4V20C2 20.5523 2.44772 21 3 21H21C21.5523 21 22 20.5523 22 20V4C22 3.44772 21.5523 3 21 3H17V1H15V3H9ZM4 10H20V19H4V10ZM4 5H7V6H9V5H15V6H17V5H20V8H4V5ZM9.87862 10.9644L12 13.0858L14.1212 10.9644L15.5355 12.3785L13.4142 14.5001L15.5354 16.6212L14.1213 18.0354L12 15.9143L9.87855 18.0354L8.46442 16.6211L10.5857 14.5001L8.46436 12.3785L9.87862 10.9644Z"></path>
+                                            </svg>
+                                            Add to cal
+                                        </a>
+                                        <a class="main-button live-stream__cal"
+                                           href="https://www.tiktok.com/@{{ username }}/live"
+                                           target="_blank">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                 viewBox="0 0 26 26"
+                                                 fill="currentColor">
+                                                <path d="M17 9.2L22.2133 5.55071C22.4395 5.39235 22.7513 5.44737 22.9096 5.6736C22.9684 5.75764 23 5.85774 23 5.96033V18.0397C23 18.3158 22.7761 18.5397 22.5 18.5397C22.3974 18.5397 22.2973 18.5081 22.2133 18.4493L17 14.8V19C17 19.5523 16.5523 20 16 20H2C1.44772 20 1 19.5523 1 19V5C1 4.44772 1.44772 4 2 4H16C16.5523 4 17 4.44772 17 5V9.2ZM17 12.3587L21 15.1587V8.84131L17 11.6413V12.3587ZM3 6V18H15V6H3Z"></path>
+                                            </svg>
+                                            Watch Live
+                                        </a>
+                                    {% else %}
+                                        <a class="main-button live-stream__cal"
+                                           href="{% url 'calendar_event' 'rnb_sundays' %}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                 viewBox="0 0 26 26" fill="currentColor">
+                                                <path d="M9 1V3H15V1H17V3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9ZM20 11H4V19H20V11ZM11 13V17H6V13H11ZM7 5H4V9H20V5H17V7H15V5H9V7H7V5Z"></path>
+                                            </svg>
+                                            Add to cal
+                                        </a>
+                                        <a class="main-button live-stream__offline" href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                 viewBox="0 0 26 26" fill="currentColor">
+                                                <path d="M17 18.4142L21.1925 22.6067L22.6067 21.1925L2.80769 1.39349L1.39348 2.80771L2.58579 4.00001H2C1.44772 4.00001 1 4.44773 1 5.00001V19C1 19.5523 1.44772 20 2 20H16C16.5523 20 17 19.5523 17 19V18.4142ZM15 16.4142V18H3V6.00001H4.58579L15 16.4142ZM23 18.0397C23 18.2517 22.875 18.4176 22.7083 18.4943L21 16.786V8.84133L17 11.6413V12.786L15 10.786V6.00001H10.214L8.21402 4.00001H16C16.5523 4.00001 17 4.44773 17 5.00001V9.20001L22.2133 5.55073C22.5447 5.31876 23 5.55583 23 5.96034V18.0397Z"></path>
+                                            </svg>
+                                            Offline
+                                        </a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% if youtube_live_url %}
+                    <p>{{ youtube_live_url }}</p>
+                    <div class="live-stream__youtube">
+                        <iframe width="100%" height="600px" src="{{ youtube_live_url }}"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                {% endif %}
             </div>
         </section>
-        <section>
-            <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@djdestruct305/video/7418910197537590558"
-                        data-video-id="7418910197537590558" style="max-width: 605px;min-width: 325px; background-color: #C6C2C2;">
-                <section><a target="_blank" title="@djdestruct305"
-                            href="https://www.tiktok.com/@djdestruct305?refer=embed">@djdestruct305</a> The vibe✨ is
-                    BACK! 🥵 Did you miss it? *Hit the yellow 🟡 👆🏽subscription button be part of my vibe* <a
-                            title="afterlastnight" target="_blank"
-                            href="https://www.tiktok.com/tag/afterlastnight?refer=embed">#afterlastnight</a> <a
-                            title="musicvideos" target="_blank"
-                            href="https://www.tiktok.com/tag/musicvideos?refer=embed">#musicvideos</a> <a
-                            title="musicvibes" target="_blank" href="https://www.tiktok.com/tag/musicvibes?refer=embed">#musicvibes</a>
-                    <a title="capcut" target="_blank" href="https://www.tiktok.com/tag/capcut?refer=embed">#CapCut</a>
-                    <a title="djdestruct305" target="_blank"
-                       href="https://www.tiktok.com/tag/djdestruct305?refer=embed">#djdestruct305</a> <a
-                            title="raneperformer" target="_blank"
-                            href="https://www.tiktok.com/tag/raneperformer?refer=embed">#raneperformer</a> <a
-                            title="djpioneer" target="_blank" href="https://www.tiktok.com/tag/djpioneer?refer=embed">#djpioneer</a>
-                    <a title="soulsonicforce" target="_blank"
-                       href="https://www.tiktok.com/tag/soulsonicforce?refer=embed">#soulsonicforce</a> <a
-                            title="brunomars" target="_blank" href="https://www.tiktok.com/tag/brunomars?refer=embed">#brunomars</a>
-                    <a title="purple" target="_blank" href="https://www.tiktok.com/tag/purple?refer=embed">#purple</a>
-                    <a title="blue" target="_blank" href="https://www.tiktok.com/tag/blue?refer=embed">#blue</a> <a
-                            title="black" target="_blank" href="https://www.tiktok.com/tag/black?refer=embed">#black</a>
-                    <a target="_blank" title="♬ original sound - DJ DESTRUCT305"
-                       href="https://www.tiktok.com/music/original-sound-7418910140495186718?refer=embed">♬ original
-                        sound - DJ DESTRUCT305</a></section>
-            </blockquote>
-            <script async src="https://www.tiktok.com/embed.js"></script>
+        <div class="slider-content">
+            <div class="slider-items" role="marquee">
+                <div class="slider-row">
+                    <div class="slider-item"><span>RNB MUSIC</span></div>
+                    <div class="slider-item"><span>RNB MUSIC</span></div>
+                    <div class="slider-item"><span>RNB MUSIC</span></div>
+                    <div class="slider-item"><span>RNB MUSIC</span></div>
+                    <div class="slider-item"><span>RNB MUSIC</span></div>
+                </div>
+            </div>
+        </div>
+        <section class="image-reveal">
+            <div class="container">
+                <div class="image-reveal__slider">
+                    <div class="image-reveal__slide" id="image-reveal_1">
+                        <img src="{% static 'main/images/main/scroller_03.jpg' %}" alt="">
+                    </div>
+                    <div class="image-reveal__slide" id="image-reveal_2">
+                        <img src="{% static 'main/images/main/scroller_02.jpg' %}" alt="">
+                    </div>
+                    <div class="image-reveal__slide" id="image-reveal_3">
+                        <img src="{% static 'main/images/main/scroller_01.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="about">
+            <div class="container">
+                <div class="about__header">
+                    <h2 class="col-5 about__title">A DJ Who<br>Keeps It Real</h2>
+                    <h3 class="col-7 about__subtitle">
+                        Let’s set the record straight: I’m DJ Destruct,
+                        and I’m not here to be “just another DJ.” Born in
+                        Haiti, now vibing in Miami, I bring a mix of
+                        chill R&B beats, a love for neon-lit nights,
+                        and a little sarcasm to keep things interesting.
+                    </h3>
+                </div>
+            </div>
         </section>
     </main>
 {% endblock %}

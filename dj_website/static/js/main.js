@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(Observer);
+    gsap.registerPlugin()
 
     // Website Preloader
     const preloader = document.querySelector(".preloader");
