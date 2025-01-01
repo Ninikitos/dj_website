@@ -229,50 +229,120 @@ liveStreamCards.forEach((card) => {
 
 // Text Slider
 // ====================================
-const row = document.querySelector(".slider-row");
-const texttl = gsap.timeline(); // Start paused
-
-if (row) {
-    const row_width = row.getBoundingClientRect().width;
-    const row_item_width = row.children[0].getBoundingClientRect().width;
-    const initial_offset = ((2 * row_item_width) / row_width) * 100 * -1;
-
-    texttl.set(row, {
-        xPercent: initial_offset
+let loops = gsap.utils.toArray('.slider-row').map((line, i) => {
+    const links = line.querySelectorAll(".slider-item");
+    return horizontalLoop(links, {
+        repeat: -1,
+        speed: 1 + i * 0.5,
+        reversed: false,
+        paddingRight: parseFloat(gsap.getProperty(links[0], "marginRight", "px"))
     });
+});
 
-    texttl.to(row, {
-        ease: "none",
-        duration: 10,
-        xPercent: 0,
-        repeat: -1
-    });
+let currentScroll = 0;
+let scrollDirection = 1;
 
-    let smoothedVelocity = 0;
-    const velocitySmoothingFactor = 0.1;
+window.addEventListener("scroll", () => {
+    let direction = (window.scrollY > currentScroll) ? 1 : -1;
 
-    ScrollTrigger.create({
-        trigger: "body",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: false,
-        onUpdate: self => {
-            const rawVelocity = self.getVelocity() / 200;
+    if (direction !== scrollDirection) {
+        // Add acceleration effect on direction change
+        loops.forEach(tl => {
+            gsap.to(tl, {
+                timeScale: direction * 3,
+                duration: 0.3,
+                ease: "power2.out",
+                overwrite: true,
+                onComplete: () => {
+                    gsap.to(tl, {
+                        timeScale: direction,
+                        duration: 0.3,
+                        ease: "power2.in"
+                    });
+                }
+            });
+        });
+        const shadowDirection = direction === 1
+            ? "5px -5px 0 var(--main-secondary)" // Scrolling down
+            : "-5px 5px 0 var(--main-secondary)"; // Scrolling up
 
-            const scaledVelocity = Math.min(
-                Math.max(Math.abs(smoothedVelocity += (rawVelocity - smoothedVelocity) * velocitySmoothingFactor), 0.1),
-                1.4
-            );
+        document.querySelectorAll('.slider-item').forEach(item => {
+            item.style.textShadow = shadowDirection;
+        });
+        scrollDirection = direction;
+    }
+    currentScroll = window.scrollY;
+});
 
-            const timeScale = rawVelocity < 0 ? -scaledVelocity : scaledVelocity;
-
-            if (Math.abs(timeScale) > 0.1) {
-                texttl.timeScale(timeScale);
-            }
+function horizontalLoop(items, config) {
+    items = gsap.utils.toArray(items);
+    config = config || {};
+    let tl = gsap.timeline({
+            repeat: config.repeat,
+            paused: config.paused,
+            defaults: {ease: "none"},
+            onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)
+        }),
+        length = items.length,
+        startX = items[0].offsetLeft,
+        times = [],
+        widths = [],
+        xPercents = [],
+        curIndex = 0,
+        pixelsPerSecond = (config.speed || 1) * 100,
+        snap = config.snap === false ? v => v : gsap.utils.snap(config.snap || 1), // some browsers shift by a pixel to accommodate flex layouts, so for example if width is 20% the first element's width might be 242px, and the next 243px, alternating back and forth. So we snap to 5 percentage points to make things look more natural
+        totalWidth, curX, distanceToStart, distanceToLoop, item, i;
+    gsap.set(items, { // convert "x" to "xPercent" to make things responsive, and populate the widths/xPercents Arrays to make lookups faster.
+        xPercent: (i, el) => {
+            let w = widths[i] = parseFloat(gsap.getProperty(el, "width", "px"));
+            xPercents[i] = snap(parseFloat(gsap.getProperty(el, "x", "px")) / w * 100 + gsap.getProperty(el, "xPercent"));
+            return xPercents[i];
         }
     });
+    gsap.set(items, {x: 0});
+    totalWidth = items[length - 1].offsetLeft + xPercents[length - 1] / 100 * widths[length - 1] - startX + items[length - 1].offsetWidth * gsap.getProperty(items[length - 1], "scaleX") + (parseFloat(config.paddingRight) || 0);
+    for (i = 0; i < length; i++) {
+        item = items[i];
+        curX = xPercents[i] / 100 * widths[i];
+        distanceToStart = item.offsetLeft + curX - startX;
+        distanceToLoop = distanceToStart + widths[i] * gsap.getProperty(item, "scaleX");
+        tl.to(item, {
+            xPercent: snap((curX - distanceToLoop) / widths[i] * 100),
+            duration: distanceToLoop / pixelsPerSecond
+        }, 0)
+            .fromTo(item, {xPercent: snap((curX - distanceToLoop + totalWidth) / widths[i] * 100)}, {
+                xPercent: xPercents[i],
+                duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond,
+                immediateRender: false
+            }, distanceToLoop / pixelsPerSecond)
+            .add("label" + i, distanceToStart / pixelsPerSecond);
+        times[i] = distanceToStart / pixelsPerSecond;
+    }
 
-    texttl.play();
+    function toIndex(index, vars) {
+        vars = vars || {};
+        (Math.abs(index - curIndex) > length / 2) && (index += index > curIndex ? -length : length); // always go in the shortest direction
+        let newIndex = gsap.utils.wrap(0, length, index),
+            time = times[newIndex];
+        if (time > tl.time() !== index > curIndex) { // if we're wrapping the timeline's playhead, make the proper adjustments
+            vars.modifiers = {time: gsap.utils.wrap(0, tl.duration())};
+            time += tl.duration() * (index > curIndex ? 1 : -1);
+        }
+        curIndex = newIndex;
+        vars.overwrite = true;
+        return tl.tweenTo(time, vars);
+    }
+
+    tl.next = vars => toIndex(curIndex + 1, vars);
+    tl.previous = vars => toIndex(curIndex - 1, vars);
+    tl.current = () => curIndex;
+    tl.toIndex = (index, vars) => toIndex(index, vars);
+    tl.times = times;
+    if (config.reversed) {
+        tl.vars.onReverseComplete();
+        tl.reverse();
+    }
+    return tl;
 }
 
 
@@ -280,9 +350,6 @@ if (row) {
 // ====================================
 // Create matchMedia instance
 let mm = gsap.matchMedia();
-const imageSlides = document.querySelector('.image-reveal');
-// const containerHeight = imageSlides.offsetHeight;
-// const scrollMultiplier = 2.5;
 
 // Desktop
 mm.add("(min-width: 768px)", () => {
@@ -292,9 +359,13 @@ mm.add("(min-width: 768px)", () => {
             start: "top",
             end: "+=1000",
             scrub: 1.5,
-            pin: true
+            pin: true,
+            markers: true,
+            onRefresh: self => self.progress && self.animation.progress(1),
         },
     });
+
+    ScrollTrigger.update();
 
     // Desktop animation sequence
     imageSliderTl
@@ -330,7 +401,6 @@ mm.add("(max-width: 767.98px)", () => {
             pin: true,
             ease: 'power2.inOut',
             pinSpacing: false,
-            markers: true
         }
     })
 });

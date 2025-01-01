@@ -7,12 +7,12 @@
 
 {% block content %}
     <!-- Preloader -->
-    {#    <div class="preloader">#}
-    {#        <h2>DJ DESTRUCT 305</h2>#}
-    {#        <div class="preloader__img-wrapper">#}
-    {#            <img src="{% static 'main/images/decor/vynil.png' %}" alt="black male portrait">#}
-    {#        </div>#}
-    {#    </div>#}
+    <div class="preloader">
+        <h2>DJ DESTRUCT 305</h2>
+        <div class="preloader__img-wrapper">
+            <img src="{% static 'main/images/decor/vynil.png' %}" alt="black male portrait">
+        </div>
+    </div>
 
     <!-- Header Section -->
     <header>
@@ -318,17 +318,14 @@
                 {% endif %}
             </div>
         </section>
-        <div class="slider-content">
-            <div class="slider-items" role="marquee">
-                <div class="slider-row">
-                    <div class="slider-item"><span>RNB MUSIC</span></div>
-                    <div class="slider-item"><span>RNB MUSIC</span></div>
-                    <div class="slider-item"><span>RNB MUSIC</span></div>
-                    <div class="slider-item"><span>RNB MUSIC</span></div>
-                    <div class="slider-item"><span>RNB MUSIC</span></div>
-                </div>
+        <section class="slider-items">
+            <div class="slider-row">
+                <span class="text slider-item">RNB MUSIC</span>
+                <span class="text slider-item">RNB MUSIC</span>
+                <span class="text slider-item">RNB MUSIC</span>
+                <span class="text slider-item">RNB MUSIC</span>
             </div>
-        </div>
+        </section>
         <section class="image-reveal">
             <div class="container">
                 <div class="image-reveal__slider">

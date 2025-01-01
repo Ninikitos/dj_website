@@ -22,7 +22,7 @@ def index(request):
     username = 'olsonparker'
     wednesday_live, sunday_live = check_live_status(username)
     youtube_live_url = check_youtube_live()
-    youtube_live_url = ''
+    # youtube_live_url = ''
 
     context = {
         'main_page_urls': main_page_urls,

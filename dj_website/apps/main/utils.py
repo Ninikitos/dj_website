@@ -6,10 +6,7 @@ from datetime import datetime
 from TikTokLive import TikTokLiveClient
 
 YOUTUBE_API_KEY = config('YOUTUBE_API_KEY')
-CHANNEL_ID = 'UCcJL2ld6kxy_nuV1u7PVQ0g'
-
-
-# CHANNEL_ID = 'UCpSU8Myul1TknsIzpsGxitg'
+CHANNEL_ID = 'UCSJ4gkVC6NrvII8umztf0Ow'
 
 
 async def is_user_live(username):
@@ -87,4 +84,3 @@ def check_youtube_live():
         print(f"An unexpected error occurred: {err}")
 
     return None
-
