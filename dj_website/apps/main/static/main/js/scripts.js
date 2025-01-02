@@ -174,7 +174,7 @@ liveStreamCards.forEach((card) => {
     const tlLiveStreamCard = gsap.timeline({
         scrollTrigger: {
             trigger: card,
-            start: "top 80%",
+            start: "clamp(top 80%)",
             toggleActions: "play none none none",
             markers: false,
         },
@@ -349,58 +349,63 @@ function horizontalLoop(items, config) {
 // Image Slider
 // ====================================
 // Create matchMedia instance
-let mm = gsap.matchMedia();
+window.addEventListener("load", () => {
 
-// Desktop
-mm.add("(min-width: 768px)", () => {
-    const imageSliderTl = gsap.timeline({
-        scrollTrigger: {
-            trigger: ".image-reveal",
-            start: "top",
-            end: "+=1000",
-            scrub: 1.5,
-            pin: true,
-            onRefresh: self => self.progress && self.animation.progress(1),
-        },
+    let mm = gsap.matchMedia();
+
+    // Desktop
+    mm.add("(min-width: 768px)", () => {
+        const imageSliderTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".image-reveal",
+                start: "clamp(top)",
+                end: "+=1000",
+                scrub: 1.5,
+                pin: true,
+                markers: true,
+                invalidateOnRefresh: true
+            },
+        });
+
+        // Desktop animation sequence
+        imageSliderTl
+            .to('#image-reveal_1', {
+                rotate: "3deg",
+                width: '100%',
+                duration: 1,
+                ease: "power2.inOut",
+            })
+            .to("#image-reveal_2", {
+                rotate: '-4deg',
+                width: "80%",
+                duration: 3,
+                ease: "power2.inOut",
+            })
+            .to("#image-reveal_3", {
+                width: "60%",
+                duration: 3,
+                ease: "power2.inOut",
+            });
+        ScrollTrigger.refresh()
     });
 
-    ScrollTrigger.update();
-
-    // Desktop animation sequence
-    imageSliderTl
-        .to('#image-reveal_1', {
-            rotate: "3deg",
-            width: '100%',
-            duration: 1,
-            ease: "power2.inOut",
+    // Mobile
+    mm.add("(max-width: 767.98px)", () => {
+        gsap.to('.image-reveal__slide', {
+            yPercent: -300,
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: '.image-reveal',
+                start: 'top center',
+                end: `clamp(top+=1500)`,
+                scrub: 1.2,
+                pin: true,
+                ease: 'power2.inOut',
+                pinSpacing: false,
+            }
         })
-        .to("#image-reveal_2", {
-            rotate: '-4deg',
-            width: "80%",
-            duration: 3,
-            ease: "power2.inOut",
-        })
-        .to("#image-reveal_3", {
-            width: "60%",
-            duration: 3,
-            ease: "power2.inOut",
-        });
-});
 
-// Mobile
-mm.add("(max-width: 767.98px)", () => {
-    gsap.to('.image-reveal__slide', {
-        yPercent: -300,
-        stagger: 0.1,
-        scrollTrigger: {
-            trigger: '.image-reveal',
-            start: 'top center',
-            end: `top+=1500`,
-            scrub: 1.2,
-            pin: true,
-            ease: 'power2.inOut',
-            pinSpacing: false,
-        }
-    })
+        ScrollTrigger.refresh()
+    });
 });
 
