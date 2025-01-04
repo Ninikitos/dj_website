@@ -1,17 +1,17 @@
 // Hide Navbar on scroll events
 // ====================================
-const navbar = document.querySelector(".navbar");
+const navbar = document.querySelector('.navbar');
 let lastScrollY = window.scrollY;
 
-window.addEventListener("scroll", () => {
+window.addEventListener('scroll', () => {
     const currentScrollY = window.scrollY;
 
     if (currentScrollY > lastScrollY && currentScrollY > 100) {
         // Scrolling down - hide navbar
-        navbar.style.transform = "translateY(-100%)";
+        navbar.style.transform = 'translateY(-100%)';
     } else {
         // Scrolling up - show navbar
-        navbar.style.transform = "translateY(0)";
+        navbar.style.transform = 'translateY(0)';
     }
 
     lastScrollY = currentScrollY;
@@ -79,13 +79,13 @@ function animate() {
     // Move the current position toward the target
     currentX += (targetX - currentX) * 0.07;
     currentY += (targetY - currentY) * 0.07;
-    const menuBg = document.querySelector(".menu");
+    const menuBg = document.querySelector('.menu');
     menuBg.style.background = `radial-gradient(circle at ${currentX}% ${currentY}%, #f23038, #f8225e, #ab73e4, #8a82ee)`;
     // Keep animating
     requestAnimationFrame(animate);
 }
 
-document.addEventListener("mousemove", (e) => {
+document.addEventListener('mousemove', (e) => {
     // Update target position on mouse move
     targetX = (e.clientX / window.innerWidth) * 100;
     targetY = (e.clientY / window.innerHeight) * 100;
@@ -97,17 +97,17 @@ animate();
 
 // Animate the live stream title, subtitle, and text
 // ====================================
-const liveStreamTitle = document.querySelector(".live-stream__title");
-const liveStreamSubtitle = document.querySelector(".live-stream__subtitle");
-const liveStreamText = document.querySelector(".live-stream__text");
+const liveStreamTitle = document.querySelector('.live-stream__title');
+const liveStreamSubtitle = document.querySelector('.live-stream__subtitle');
+const liveStreamText = document.querySelector('.live-stream__text');
 
 // Create a timeline for the text elements
 const tlLiveStreamText = gsap.timeline({
     scrollTrigger: {
         // Trigger the animation when the title enters the viewport
         trigger: liveStreamTitle,
-        start: "top 90%",
-        toggleActions: "play none none none",
+        start: 'top 90%',
+        toggleActions: 'play none none none',
         markers: false,
     },
 });
@@ -125,7 +125,7 @@ tlLiveStreamText.fromTo(
         opacity: 1,
         duration: 1.5,
         clipPath: 'inset(0% 0 0 0)',
-        ease: "power2.out",
+        ease: 'power2.out',
     }
 );
 
@@ -139,10 +139,10 @@ tlLiveStreamText.fromTo(
     {
         y: 0,
         opacity: 1,
-        duration: 0.8,
-        ease: "power2.out",
+        duration: 1.5,
+        ease: 'power2.out',
     },
-    "<0.2"
+    '<0.2'
 );
 
 // Animate the text
@@ -158,24 +158,24 @@ tlLiveStreamText.fromTo(
         opacity: 1,
         clipPath: 'inset(0 0 0% 0)',
         duration: 0.8,
-        ease: "power2.out",
+        ease: 'power2.out',
     },
-    "<0.2"
+    '<0.2'
 );
 
 
 // Live stream card animation
 // ====================================
-const liveStreamCards = document.querySelectorAll(".live-stream__card-wrapper");
+const liveStreamCards = document.querySelectorAll('.live-stream__card-wrapper');
 liveStreamCards.forEach((card) => {
-    const cardText = card.querySelector(".card-left");
-    const cardImage = card.querySelector(".live-stream__image");
+    const cardText = card.querySelector('.card-left');
+    const cardImage = card.querySelector('.live-stream__image');
 
     const tlLiveStreamCard = gsap.timeline({
         scrollTrigger: {
             trigger: card,
-            start: "clamp(top 80%)",
-            toggleActions: "play none none none",
+            start: 'clamp(top 80%)',
+            toggleActions: 'play none none none',
             markers: false,
         },
     });
@@ -184,12 +184,12 @@ liveStreamCards.forEach((card) => {
     tlLiveStreamCard.fromTo(
         card,
         {
-            clipPath: "inset(0 0 100% 0)",
+            clipPath: 'inset(0 0 100% 0)',
         },
         {
-            clipPath: "inset(0 0 0% 0)",
+            clipPath: 'inset(0 0 0% 0)',
             duration: 2,
-            ease: "power2.out",
+            ease: 'power2.out',
         }
     );
 
@@ -197,32 +197,32 @@ liveStreamCards.forEach((card) => {
     tlLiveStreamCard.fromTo(
         cardText,
         {
-            clipPath: "inset(100% 0 0 0)",
+            clipPath: 'inset(100% 0 0 0)',
             opacity: 0,
         },
         {
-            clipPath: "inset(0% 0 0 0)",
+            clipPath: 'inset(0% 0 0 0)',
             opacity: 1,
             duration: 1.2,
-            ease: "power2.out",
+            ease: 'power2.out',
         },
-        "<0.3"
+        '<0.3'
     );
 
     // Reveal image
     tlLiveStreamCard.fromTo(
         cardImage,
         {
-            clipPath: "inset(0 0 100% 0)",
+            clipPath: 'inset(0 0 100% 0)',
             opacity: 0,
         },
         {
-            clipPath: "inset(0 0 0% 0)",
+            clipPath: 'inset(0 0 0% 0)',
             opacity: 1,
             duration: 0.8,
-            ease: "power2.out",
+            ease: 'power2.out',
         },
-        "<0.3"
+        '<0.3'
     );
 });
 
@@ -230,19 +230,19 @@ liveStreamCards.forEach((card) => {
 // Text Slider
 // ====================================
 let loops = gsap.utils.toArray('.slider-row').map((line, i) => {
-    const links = line.querySelectorAll(".slider-item");
+    const links = line.querySelectorAll('.slider-item');
     return horizontalLoop(links, {
         repeat: -1,
         speed: 1 + i * 0.5,
         reversed: false,
-        paddingRight: parseFloat(gsap.getProperty(links[0], "marginRight", "px"))
+        paddingRight: parseFloat(gsap.getProperty(links[0], 'marginRight', 'px'))
     });
 });
 
 let currentScroll = 0;
 let scrollDirection = 1;
 
-window.addEventListener("scroll", () => {
+window.addEventListener('scroll', () => {
     let direction = (window.scrollY > currentScroll) ? 1 : -1;
 
     if (direction !== scrollDirection) {
@@ -251,20 +251,20 @@ window.addEventListener("scroll", () => {
             gsap.to(tl, {
                 timeScale: direction * 3,
                 duration: 0.3,
-                ease: "power2.out",
+                ease: 'power2.out',
                 overwrite: true,
                 onComplete: () => {
                     gsap.to(tl, {
                         timeScale: direction,
                         duration: 0.3,
-                        ease: "power2.in"
+                        ease: 'power2.in'
                     });
                 }
             });
         });
         const shadowDirection = direction === 1
-            ? "5px -5px 0 var(--main-secondary)" // Scrolling down
-            : "-5px 5px 0 var(--main-secondary)"; // Scrolling up
+            ? '5px -5px 0 var(--main-secondary)' // Scrolling down
+            : '-5px 5px 0 var(--main-secondary)'; // Scrolling up
 
         document.querySelectorAll('.slider-item').forEach(item => {
             item.style.textShadow = shadowDirection;
@@ -280,7 +280,7 @@ function horizontalLoop(items, config) {
     let tl = gsap.timeline({
             repeat: config.repeat,
             paused: config.paused,
-            defaults: {ease: "none"},
+            defaults: {ease: 'none'},
             onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)
         }),
         length = items.length,
@@ -292,20 +292,20 @@ function horizontalLoop(items, config) {
         pixelsPerSecond = (config.speed || 1) * 100,
         snap = config.snap === false ? v => v : gsap.utils.snap(config.snap || 1), // some browsers shift by a pixel to accommodate flex layouts, so for example if width is 20% the first element's width might be 242px, and the next 243px, alternating back and forth. So we snap to 5 percentage points to make things look more natural
         totalWidth, curX, distanceToStart, distanceToLoop, item, i;
-    gsap.set(items, { // convert "x" to "xPercent" to make things responsive, and populate the widths/xPercents Arrays to make lookups faster.
+    gsap.set(items, { // convert 'x' to 'xPercent' to make things responsive, and populate the widths/xPercents Arrays to make lookups faster.
         xPercent: (i, el) => {
-            let w = widths[i] = parseFloat(gsap.getProperty(el, "width", "px"));
-            xPercents[i] = snap(parseFloat(gsap.getProperty(el, "x", "px")) / w * 100 + gsap.getProperty(el, "xPercent"));
+            let w = widths[i] = parseFloat(gsap.getProperty(el, 'width', 'px'));
+            xPercents[i] = snap(parseFloat(gsap.getProperty(el, 'x', 'px')) / w * 100 + gsap.getProperty(el, 'xPercent'));
             return xPercents[i];
         }
     });
     gsap.set(items, {x: 0});
-    totalWidth = items[length - 1].offsetLeft + xPercents[length - 1] / 100 * widths[length - 1] - startX + items[length - 1].offsetWidth * gsap.getProperty(items[length - 1], "scaleX") + (parseFloat(config.paddingRight) || 0);
+    totalWidth = items[length - 1].offsetLeft + xPercents[length - 1] / 100 * widths[length - 1] - startX + items[length - 1].offsetWidth * gsap.getProperty(items[length - 1], 'scaleX') + (parseFloat(config.paddingRight) || 0);
     for (i = 0; i < length; i++) {
         item = items[i];
         curX = xPercents[i] / 100 * widths[i];
         distanceToStart = item.offsetLeft + curX - startX;
-        distanceToLoop = distanceToStart + widths[i] * gsap.getProperty(item, "scaleX");
+        distanceToLoop = distanceToStart + widths[i] * gsap.getProperty(item, 'scaleX');
         tl.to(item, {
             xPercent: snap((curX - distanceToLoop) / widths[i] * 100),
             duration: distanceToLoop / pixelsPerSecond
@@ -315,7 +315,7 @@ function horizontalLoop(items, config) {
                 duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond,
                 immediateRender: false
             }, distanceToLoop / pixelsPerSecond)
-            .add("label" + i, distanceToStart / pixelsPerSecond);
+            .add('label' + i, distanceToStart / pixelsPerSecond);
         times[i] = distanceToStart / pixelsPerSecond;
     }
 
@@ -349,63 +349,299 @@ function horizontalLoop(items, config) {
 // Image Slider
 // ====================================
 // Create matchMedia instance
-window.addEventListener("load", () => {
+window.addEventListener('load', () => {
+    const imageSliding = document.querySelector('.image-reveal');
+    const textSliding = document.querySelector('.slider-items');
+    const liveStreaming = document.querySelector('.live-stream');
 
-    let mm = gsap.matchMedia();
+    const imageSliderMM = gsap.matchMedia();
 
     // Desktop
-    mm.add("(min-width: 768px)", () => {
+    imageSliderMM.add('(min-width: 768px)', () => {
         const imageSliderTl = gsap.timeline({
             scrollTrigger: {
-                trigger: ".image-reveal",
-                start: "clamp(top)",
-                end: "+=1000",
+                trigger: '.image-reveal',
+                start: 'clamp(top)',
+                end: '+=1000',
                 scrub: 1.5,
                 pin: true,
-                markers: true,
                 invalidateOnRefresh: true
             },
         });
 
-        // Desktop animation sequence
         imageSliderTl
             .to('#image-reveal_1', {
-                rotate: "3deg",
+                rotate: '3deg',
                 width: '100%',
                 duration: 1,
-                ease: "power2.inOut",
+                ease: 'power2.inOut',
             })
-            .to("#image-reveal_2", {
+            .to('#image-reveal_2', {
                 rotate: '-4deg',
-                width: "80%",
+                width: '80%',
                 duration: 3,
-                ease: "power2.inOut",
+                ease: 'power2.inOut',
             })
-            .to("#image-reveal_3", {
-                width: "60%",
+            .to('#image-reveal_3', {
+                width: '60%',
                 duration: 3,
-                ease: "power2.inOut",
-            });
+                ease: 'power2.inOut',
+            })
+            .to('body', {
+                backgroundColor: 'rgba(28, 24, 25, 1)',
+                duration: 1,
+                ease: 'power2.inOut',
+            }, '<');
         ScrollTrigger.refresh()
     });
 
     // Mobile
-    mm.add("(max-width: 767.98px)", () => {
-        gsap.to('.image-reveal__slide', {
-            yPercent: -300,
-            stagger: 0.1,
+    imageSliderMM.add('(max-width: 767.98px)', () => {
+        const timeline = gsap.timeline({
             scrollTrigger: {
                 trigger: '.image-reveal',
-                start: 'top center',
-                end: `clamp(top+=1500)`,
+                start: 'top center+=140',
+                end: 'bottom-=600',
                 scrub: 1.2,
                 pin: true,
                 ease: 'power2.inOut',
                 pinSpacing: false,
             }
-        })
+        });
 
-        ScrollTrigger.refresh()
+        // Animation for sliding up images
+        timeline.to('.image-reveal__slide', {
+            yPercent: -100,
+            stagger: 0.5,
+        }).to('body', { // Targeting the body for background color
+            backgroundColor: 'rgba(28, 24, 25, 1)', // New background color
+            duration: 1,
+            ease: 'power2.inOut',
+        }, '<');
+
+        ScrollTrigger.refresh();
     });
 });
+
+
+// About reveal
+// ====================================
+const aboutTitle = document.querySelector('.about__title');
+const aboutSubtitle = document.querySelector('.about__subtitle');
+const aboutTextList = document.querySelectorAll('.about__content-item');
+const aboutImage = document.querySelector('.about__content-img');
+const aboutTextDescription = document.querySelector('.about__content-text p');
+const aboutCTA = document.querySelector('#about');
+const aboutFacts = document.querySelectorAll('.about__info-item');
+
+const aboutMM = gsap.matchMedia();
+
+// Desktop
+aboutMM.add('(min-width: 768px)', () => {
+    const tlAboutDesktop = gsap.timeline({
+        scrollTrigger: {
+            trigger: '.about',
+            start: 'clamp(top+=500)',
+            toggleActions: 'play none none none'
+        },
+    });
+
+    // Animation sequences
+    tlAboutDesktop
+        .fromTo(aboutTitle, {
+            y: 10,
+            opacity: 0,
+            clipPath: 'inset(100% 0 0 0)',
+        }, {
+            y: 0,
+            opacity: 1,
+            duration: 1.5,
+            clipPath: 'inset(0% 0 0 0)',
+            ease: 'power2.out',
+        })
+        .fromTo(aboutSubtitle, {
+            y: 10,
+            opacity: 0,
+            clipPath: 'inset(0 0 100% 0)',
+        }, {
+            y: 0,
+            opacity: 1,
+            clipPath: 'inset(0 0 0% 0)',
+            duration: 1.5,
+            ease: 'power2.out',
+        }, '<0.2')
+        .fromTo(aboutTextList, {
+            y: 10,
+            opacity: 0,
+            clipPath: 'inset(0 0 100% 0)',
+            '--border-width': '0%'
+        }, {
+            y: 0,
+            opacity: 1,
+            clipPath: 'inset(0 0 0% 0)',
+            duration: 2,
+            stagger: 0.2,
+            '--border-width': '100%',
+            ease: 'power2.in',
+        })
+        .fromTo(aboutImage, {
+            y: 10,
+            opacity: 0,
+            clipPath: 'inset(0 100% 0 0)',
+        }, {
+            y: 0,
+            opacity: 1,
+            clipPath: 'inset(0 0% 0 0)',
+            duration: 3,
+            ease: 'power2.out',
+        }, '<0.2');
+
+    // Timeline for animations that execute on scrollTrigger
+    const tlAboutDesktopScroll = gsap.timeline({
+        scrollTrigger: {
+            trigger: aboutTextDescription,
+            start: 'top+=500',
+            toggleActions: 'play none none none',
+        },
+    });
+
+    // ScrollTrigger-based animation sequences
+    tlAboutDesktopScroll
+        .fromTo(aboutTextDescription, {
+            y: 20,
+            opacity: 0,
+            clipPath: 'inset(0 0 100% 0)',
+        }, {
+            y: 0,
+            opacity: 1,
+            clipPath: 'inset(0 0 0% 0)',
+            duration: 0.8,
+            ease: 'power2.out',
+        },)
+        .fromTo(aboutCTA, {
+            y: 20,
+            opacity: 0,
+        }, {
+            y: 0,
+            opacity: 1,
+            duration: 3,
+            ease: 'power2.out',
+        }, '<0.2')
+        .fromTo(aboutFacts, {
+            y: 20,
+            opacity: 0,
+            clipPath: 'inset(100% 0 0 0)',
+        }, {
+            y: 0,
+            opacity: 1,
+            clipPath: 'inset(0% 0 0 0)',
+            duration: 2,
+            stagger: 0.4,
+            ease: 'power2.out',
+        }, '<0.2');
+});
+
+// Mobile
+aboutMM.add('(max-width: 767.98px)', () => {
+    const tlAboutMobile = gsap.timeline({
+        scrollTrigger: {
+            trigger: '.about',
+            start: 'top-=700',
+            toggleActions: 'play none none none'
+        },
+    });
+
+    // Reuse the same animation logic
+    tlAboutMobile
+        .fromTo(aboutTitle, {
+            y: 10,
+            opacity: 0,
+            clipPath: 'inset(100% 0 0 0)',
+        }, {
+            y: 0,
+            opacity: 1,
+            duration: 1.5,
+            clipPath: 'inset(0% 0 0 0)',
+            ease: 'power2.out',
+        })
+        .fromTo(aboutSubtitle, {
+            y: 10,
+            opacity: 0,
+        }, {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+        }, '<0.2')
+        .fromTo(aboutTextList, {
+            y: 10,
+            opacity: 0,
+            clipPath: 'inset(0 0 100% 0)',
+            '--border-width': '0%'
+        }, {
+            y: 0,
+            opacity: 1,
+            clipPath: 'inset(0 0 0% 0)',
+            duration: 2,
+            stagger: 0.2,
+            '--border-width': '100%',
+            ease: 'power2.in',
+        })
+        .fromTo(aboutImage, {
+            y: 10,
+            opacity: 0,
+            clipPath: 'inset(0 100% 0 0)',
+        }, {
+            y: 0,
+            opacity: 1,
+            clipPath: 'inset(0 0% 0 0)',
+            duration: 3,
+            ease: 'power2.out',
+        }, '<0.2');
+
+    // Timeline for animations that execute on scrollTrigger
+    const tlAboutDesktopScroll = gsap.timeline({
+        scrollTrigger: {
+            trigger: aboutTextDescription,
+            start: 'top bottom-=200',
+            toggleActions: 'play none none none',
+        },
+    });
+
+    // ScrollTrigger-based animation sequences
+    tlAboutDesktopScroll
+        .fromTo(aboutTextDescription, {
+            y: 20,
+            opacity: 0,
+            clipPath: 'inset(100% 0 0 0%)'
+        }, {
+            y: 0,
+            opacity: 1,
+            clipPath: 'inset(0% 0 0 0%)',
+            duration: 0.8,
+            ease: 'power2.out',
+        },)
+        .fromTo(aboutCTA, {
+            y: 20,
+            opacity: 0,
+        }, {
+            y: 0,
+            opacity: 1,
+            duration: 3,
+            ease: 'power2.out',
+        }, '<0.2')
+        .fromTo(aboutFacts, {
+            y: 20,
+            opacity: 0,
+            clipPath: 'inset(100% 0 0 0%)',
+        }, {
+            y: 0,
+            opacity: 1,
+            clipPath: 'inset(0% 0 0 0%)',
+            duration: 2,
+            stagger: 0.4,
+            ease: 'power2.out',
+        }, '<0.2');
+});
+
 
