@@ -15,7 +15,8 @@ def index(request):
     main_page_urls = MainPage.objects.first()
     music_samples = MusicSample.objects.all()
     youtube_content = YoutubeContent.objects.all()
-    music_content = MusicContent.objects.all()
+    music_content = list(MusicContent.objects.all())
+    music_content_first = music_content[0] if music_content else None
     products = Product.objects.all()
 
     # Check live status for Wednesday and Sunday
@@ -29,6 +30,7 @@ def index(request):
         'music_samples': music_samples,
         'youtube_content': youtube_content,
         'music_content': music_content,
+        'music_content_first': music_content_first,
         'products': products,
         'wednesday_live': wednesday_live,
         'sunday_live': sunday_live,

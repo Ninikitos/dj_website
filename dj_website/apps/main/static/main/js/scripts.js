@@ -350,10 +350,6 @@ function horizontalLoop(items, config) {
 // ====================================
 // Create matchMedia instance
 window.addEventListener('load', () => {
-    const imageSliding = document.querySelector('.image-reveal');
-    const textSliding = document.querySelector('.slider-items');
-    const liveStreaming = document.querySelector('.live-stream');
-
     const imageSliderMM = gsap.matchMedia();
 
     // Desktop
@@ -389,9 +385,9 @@ window.addEventListener('load', () => {
             })
             .to('body', {
                 backgroundColor: 'rgba(28, 24, 25, 1)',
-                duration: 1,
+                duration: 10,
                 ease: 'power2.inOut',
-            }, '<');
+            }, '-=9');
         ScrollTrigger.refresh()
     });
 
@@ -402,7 +398,7 @@ window.addEventListener('load', () => {
                 trigger: '.image-reveal',
                 start: 'top center+=140',
                 end: 'bottom-=600',
-                scrub: 1.2,
+                scrub: 2,
                 pin: true,
                 ease: 'power2.inOut',
                 pinSpacing: false,
@@ -413,8 +409,8 @@ window.addEventListener('load', () => {
         timeline.to('.image-reveal__slide', {
             yPercent: -100,
             stagger: 0.5,
-        }).to('body', { // Targeting the body for background color
-            backgroundColor: 'rgba(28, 24, 25, 1)', // New background color
+        }).to('body', {
+            backgroundColor: 'rgba(28, 24, 25, 1)',
             duration: 1,
             ease: 'power2.inOut',
         }, '<');
@@ -483,7 +479,7 @@ aboutMM.add('(min-width: 768px)', () => {
             stagger: 0.2,
             '--border-width': '100%',
             ease: 'power2.in',
-        })
+        }, '-=3')
         .fromTo(aboutImage, {
             y: 10,
             opacity: 0,
@@ -494,7 +490,7 @@ aboutMM.add('(min-width: 768px)', () => {
             clipPath: 'inset(0 0% 0 0)',
             duration: 3,
             ease: 'power2.out',
-        }, '<0.2');
+        }, '<0.3');
 
     // Timeline for animations that execute on scrollTrigger
     const tlAboutDesktopScroll = gsap.timeline({
@@ -517,16 +513,16 @@ aboutMM.add('(min-width: 768px)', () => {
             clipPath: 'inset(0 0 0% 0)',
             duration: 0.8,
             ease: 'power2.out',
-        },)
+        }, '<')
         .fromTo(aboutCTA, {
             y: 20,
             opacity: 0,
         }, {
             y: 0,
             opacity: 1,
-            duration: 3,
+            duration: 1,
             ease: 'power2.out',
-        }, '<0.2')
+        }, '<')
         .fromTo(aboutFacts, {
             y: 20,
             opacity: 0,
@@ -535,10 +531,10 @@ aboutMM.add('(min-width: 768px)', () => {
             y: 0,
             opacity: 1,
             clipPath: 'inset(0% 0 0 0)',
-            duration: 2,
+            duration: 1,
             stagger: 0.4,
             ease: 'power2.out',
-        }, '<0.2');
+        }, '<');
 });
 
 // Mobile
@@ -595,7 +591,7 @@ aboutMM.add('(max-width: 767.98px)', () => {
             y: 0,
             opacity: 1,
             clipPath: 'inset(0 0% 0 0)',
-            duration: 3,
+            duration: 2,
             ease: 'power2.out',
         }, '<0.2');
 
@@ -638,10 +634,246 @@ aboutMM.add('(max-width: 767.98px)', () => {
             y: 0,
             opacity: 1,
             clipPath: 'inset(0% 0 0 0%)',
-            duration: 2,
+            duration: 1.5,
             stagger: 0.4,
             ease: 'power2.out',
-        }, '<0.2');
+        }, '-=2');
 });
 
 
+// Music
+// ====================================
+const slider = document.querySelector('.music__yt-slider ul');
+
+let isDragging = false;
+let startX, scrollLeft, dragStartTime;
+let movedDuringDrag = false;
+
+// Add threshold for distinguishing between clicks and drags
+const DRAG_THRESHOLD = 5;
+const CLICK_THRESHOLD = 200;
+
+// Mouse Down: Start Dragging
+slider.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    dragStartTime = Date.now();
+    movedDuringDrag = false;
+    slider.classList.add('active');
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+});
+
+// Mouse Leave: Stop Dragging
+slider.addEventListener('mouseleave', () => {
+    isDragging = false;
+    slider.classList.remove('active');
+});
+
+// Mouse Up: Stop Dragging
+slider.addEventListener('mouseup', (e) => {
+    const dragDuration = Date.now() - dragStartTime;
+
+    if (movedDuringDrag || dragDuration > CLICK_THRESHOLD) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Prevent the next click event
+        const preventNextClick = (clickEvent) => {
+            clickEvent.preventDefault();
+            clickEvent.stopPropagation();
+            slider.removeEventListener('click', preventNextClick, true);
+        };
+
+        slider.addEventListener('click', preventNextClick, true);
+    }
+
+    isDragging = false;
+    slider.classList.remove('active');
+});
+
+// Mouse Move: Scroll While Dragging
+slider.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 2;
+
+    if (Math.abs(walk) > DRAG_THRESHOLD) {
+        movedDuringDrag = true;
+    }
+
+    slider.scrollLeft = scrollLeft - walk;
+});
+
+// Prevent Text Selection While Dragging
+slider.addEventListener('dragstart', (e) => e.preventDefault());
+
+// Handle clicks
+slider.addEventListener('click', (e) => {
+    if (movedDuringDrag) {
+        e.preventDefault();
+        e.stopPropagation();
+        movedDuringDrag = false;
+    }
+});
+
+// Animations
+const music = document.querySelector('.music');
+const musicAvatarImg = document.querySelector('.music__image-wrapper img');
+const musicAvatarSlogan = document.querySelector('.music__slogan');
+const musicTitle = document.querySelector('.music__title');
+const musicSubtitle = document.querySelector('.music__subtitle');
+const musicYtTitle = document.querySelector('.music__yt-title');
+const musicYtSliderItems = document.querySelectorAll('.music__yt-slider-item');
+const musicTracksTitle = document.querySelector('.music__tracks-title');
+const musicTracksItems = document.querySelectorAll('.hero__music-item.music__tracks-item');
+
+const musicMM = gsap.matchMedia()
+musicMM.add('(min-width: 768px)', () => {
+    createMusicTl(300, 950);
+    let musicContentTl = createMusicContentTl(400);
+    musicAnimations(musicContentTl);
+});
+
+musicMM.add('(max-width: 767.98px)', () => {
+    createMusicTl(-900, -40);
+    let musicContentTl = createMusicContentTl(-700);
+    musicAnimations(musicContentTl);
+});
+
+function createMusicTl(start, end) {
+    return gsap.timeline({
+        scrollTrigger: {
+            trigger: music,
+            start: `top+=${start}`,
+            end: `bottom+=${end}`,
+            toggleActions: 'play none none none',
+            onEnter: () => {
+                gsap.to(music, {
+                    duration: 1,
+                    backgroundColor: '#C6C2C2',
+                    ease: 'power2.inOut',
+                });
+            },
+            onLeave: () => {
+                gsap.to(music, {
+                    duration: 1,
+                    backgroundColor: '#1C1819',
+                    ease: 'power2.inOut',
+                });
+            },
+            onEnterBack: () => {
+                gsap.to(music, {
+                    duration: 1,
+                    backgroundColor: '#C6C2C2',
+                    ease: 'power2.inOut',
+                });
+            },
+            onLeaveBack: () => {
+                gsap.to(music, {
+                    duration: 1,
+                    backgroundColor: '#1C1819',
+                    ease: 'power2.inOut',
+                });
+            },
+        },
+    });
+}
+
+function createMusicContentTl(start) {
+    return gsap.timeline({
+        scrollTrigger: {
+            trigger: musicTitle,
+            start: `top+=${start}`,
+            toggleActions: 'play none none none',
+        }
+    });
+}
+
+function musicAnimations(timeline) {
+    return timeline
+        .fromTo(musicAvatarImg, {
+            y: 10,
+            opacity: 0,
+            clipPath: 'inset(100% 0 0 0)',
+        }, {
+            y: 0,
+            opacity: 1,
+            duration: 1.5,
+            clipPath: 'inset(0% 0 0 0)',
+            ease: 'power2.out',
+        })
+        .fromTo(musicAvatarSlogan, {
+            opacity: 0,
+            clipPath: 'inset(0 0 100% 0)',
+        }, {
+            opacity: 1,
+            clipPath: 'inset(0 0 0% 0)',
+            duration: 1.5,
+            ease: 'power2.in',
+        }, '-=2')
+        .fromTo(musicTitle, {
+            y: 10,
+            opacity: 0,
+            clipPath: 'inset(0 0 100% 0)',
+        }, {
+            y: 0,
+            opacity: 1,
+            clipPath: 'inset(0 0 0% 0)',
+            duration: 1.5,
+            ease: 'power2.in',
+        }, '-=2')
+        .fromTo(musicSubtitle, {
+            opacity: 0,
+            clipPath: 'inset(0 0 100% 0)',
+        }, {
+            opacity: 1,
+            clipPath: 'inset(0 0 0% 0)',
+            duration: 1.5,
+            ease: 'power2.out',
+        }, '-=2')
+        .fromTo(musicYtTitle, {
+            opacity: 0,
+            clipPath: 'inset(0 0 100% 0)',
+        }, {
+            opacity: 1,
+            clipPath: 'inset(0 0 0% 0)',
+            duration: 1.5,
+            ease: 'power2.out',
+        }, '-=1')
+        .fromTo(musicYtSliderItems, {
+            y: 10,
+            opacity: 0,
+            clipPath: 'inset(0 0 100% 0)',
+        }, {
+            y: 0,
+            opacity: 1,
+            clipPath: 'inset(0 0 0% 0)',
+            duration: 1,
+            stagger: 0.2,
+            ease: 'power2.out',
+        }, '<')
+        .fromTo(musicTracksTitle, {
+            opacity: 0,
+            clipPath: 'inset(0 0 100% 0)',
+        }, {
+            opacity: 1,
+            clipPath: 'inset(0 0 0% 0)',
+            duration: 1.5,
+            ease: 'power2.out',
+        })
+        .fromTo(musicTracksItems, {
+            y: 10,
+            opacity: 0,
+            clipPath: 'inset(0 0 100% 0)',
+        }, {
+            y: 0,
+            x: 0,
+            opacity: 1,
+            clipPath: 'inset(0 0 0% 0)',
+            duration: 1,
+            stagger: 0.2,
+            ease: 'power2.out',
+        }, '<');
+}

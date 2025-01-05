@@ -7,12 +7,12 @@
 
 {% block content %}
     <!-- Preloader -->
-{#    <div class="preloader">#}
-{#        <h2>DJ DESTRUCT 305</h2>#}
-{#        <div class="preloader__img-wrapper">#}
-{#            <img src="{% static 'main/images/decor/vynil.png' %}" alt="black male portrait">#}
-{#        </div>#}
-{#    </div>#}
+    <div class="preloader">
+        <h2>DJ DESTRUCT 305</h2>
+        <div class="preloader__img-wrapper">
+            <img src="{% static 'main/images/decor/vynil.png' %}" alt="black male portrait">
+        </div>
+    </div>
 
     <!-- Header Section -->
     <header>
@@ -120,28 +120,30 @@
                     <div class="hero__content row">
                         <div class="col-sm-12 col-md-5 col-lg-5 hero__music-section">
                             <p class="hero__music-content">
-                                <a class="hero__music-link link link__reset" href="#">Listen all</a>
+                                <a class="hero__music-link link link__reset" href="https://www.mixcloud.com/DJDestruct305/" target="_blank">Listen all</a>
                             </p>
-                            <ul class="hero__music-items hero__music-content">
-                                {% for item in music_content %}
-                                    <li class="hero__music-item">
-                                        <a class="hero__music-inside-link" href="{{ item.link }}" target="_blank">
-                                            <div>
-                                                <img class="hero__music-img" src="{{ item.photo.url }}"
-                                                     alt="{{ item.title }}">
-                                            </div>
-                                            <p class="hero__music-title">{{ item.title }}</p>
-                                            <span>
+                            {% if music_content %}
+                                <ul class="hero__music-items hero__music-content">
+                                    {% for item in music_content %}
+                                        <li class="hero__music-item">
+                                            <a class="hero__music-inside-link" href="{{ item.link }}" target="_blank">
+                                                <div>
+                                                    <img class="hero__music-img" src="{{ item.photo.url }}"
+                                                         alt="{{ item.title }}">
+                                                </div>
+                                                <p class="hero__music-title">{{ item.title }}</p>
+                                                <span>
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M12.1712 12.0005L9.34277 9.17203L10.757 7.75781L14.9996 12.0005L10.757 16.2431L9.34277 14.8289L12.1712 12.0005Z"
                                                           fill="white"/>
                                                 </svg>
                                             </span>
-                                        </a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
                         </div>
                         <div class="hero__content-text col-sm-12 col-md-7 col-lg-6">
                             <h1 class="hero__title">LIVE Tiktok DJ</h1>
@@ -367,7 +369,7 @@
                                 </li>
                                 <li class="about__content-item">
                                     <p>From</p>
-                                    <p>Haiti</p>
+                                    <p>🇭🇹 Haiti</p>
                                 </li>
                                 <li class="about__content-item">
                                     <p>Years playing</p>
@@ -389,23 +391,25 @@
                     <div class="col-sm-12 col-md-7">
                         <div class="about__content-img">
                             <img src="{% static 'main/images/main/main_avatar.jpg' %}" alt="black male">
-                            <div class="hero__music-item about__music">
-                                <a class="hero__music-inside-link" href="{{ music_content.first.link }}"
-                                   target="_blank">
-                                    <div class="about__music__avatar">
-                                        <img class="hero__music-img" src="{{ music_content.first.photo.url }}"
-                                             alt="{{ music_content.first.title }}">
-                                    </div>
-                                    <p class="hero__music-title about__music__title">{{ music_content.first.title }}</p>
-                                    <span>
+                            {% if music_content_first %}
+                                <div class="hero__music-item about__music">
+                                    <a class="hero__music-inside-link" href="{{ music_content_first.link }}"
+                                       target="_blank">
+                                        <div class="about__music__avatar">
+                                            <img class="hero__music-img" src="{{ music_content_first.photo.url }}"
+                                                 alt="{{ music_content_first.title }}">
+                                        </div>
+                                        <p class="hero__music-title about__music__title">{{ music_content_first.title }}</p>
+                                        <span>
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path d="M12.1712 12.0005L9.34277 9.17203L10.757 7.75781L14.9996 12.0005L10.757 16.2431L9.34277 14.8289L12.1712 12.0005Z"
                                                   fill="white"/>
                                         </svg>
                                     </span>
-                                </a>
-                            </div>
+                                    </a>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -413,14 +417,16 @@
                     <div class="col-12">
                         <ul class="about__facts">
                             <li class="about__info-item row">
-                                <p class="offset-sm-0 offset-md-0 offset-lg-2 col-sm-12 col-md-5 col-lg-3 about__info-title">I’m always the<br>life of the party</p>
+                                <p class="offset-sm-0 offset-md-0 offset-lg-2 col-sm-12 col-md-5 col-lg-3 about__info-title">
+                                    I’m always the<br>life of the party</p>
                                 <p class="col-sm-12 com-md-7 about__info-subtitle">
                                     People expect me to bring the vibes wherever I go,
                                     like the music never stops.
                                 </p>
                             </li>
                             <li class="about__info-item row">
-                                <p class="offset-sm-0 offset-md-0 offset-lg-2 col-sm-12 col-md-5 col-lg-3 about__info-title">I’m obsessed<br>with my gear</p>
+                                <p class="offset-sm-0 offset-md-0 offset-lg-2 col-sm-12 col-md-5 col-lg-3 about__info-title">
+                                    I’m obsessed<br>with my gear</p>
                                 <p class="col-sm-12 com-md-7 about__info-subtitle">
                                     My gear isn’t just equipment—it’s an extension of
                                     my creativity. From TikTok live sets to R&B parties,
@@ -429,14 +435,16 @@
                                 </p>
                             </li>
                             <li class="about__info-item row">
-                                <p class="offset-sm-0 offset-md-0 offset-lg-2 col-sm-12 col-md-5 col-lg-3 about__info-title">I’m a total<br>night owl</p>
+                                <p class="offset-sm-0 offset-md-0 offset-lg-2 col-sm-12 col-md-5 col-lg-3 about__info-title">
+                                    I’m a total<br>night owl</p>
                                 <p class="col-sm-12 com-md-7 about__info-subtitle">
                                     It’s like people think I never see the morning
                                     light unless I’ve stayed up all night mixing tracks.
                                 </p>
                             </li>
                             <li class="about__info-item row">
-                                <p class="offset-sm-0 offset-md-0 offset-lg-2 col-sm-12 col-md-5 col-lg-3 about__info-title">I’m picky<br>about music</p>
+                                <p class="offset-sm-0 offset-md-0 offset-lg-2 col-sm-12 col-md-5 col-lg-3 about__info-title">
+                                    I’m picky<br>about music</p>
                                 <p class="col-sm-12 com-md-7 about__info-subtitle">
                                     Some people think I’m a bit of a music snob
                                     because I can’t help but have strong opinions
@@ -448,7 +456,72 @@
                 </div>
             </div>
         </section>
-        <section style="height: 400vh">
+        <section class="music">
+            <div class="container music-container">
+                <div class="music__avatar">
+                    <div class="music__image-wrapper">
+                        <img src="{% static 'main/images/main/sub_avatar.png' %}"
+                             alt="black smiling male holding microphone">
+                        <span class="music__slogan">Welcome to my vibes</span>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 music__top">
+                    <h2 class="music__title">
+                        Feel the Rhythm,<br>Wherever You Are
+                    </h2>
+                    <p class="music__subtitle">
+                        Stream DJ Destruct’s hottest mixes, remixes,
+                        and R&B TikTok beats. Whether you’re unwinding,
+                        working out, or getting ready to hit the town,
+                        there’s a mix for every vibe.
+                    </p>
+                </div>
+                <div>
+                {% if youtube_content %}
+                    <h3 class="music__yt-title">Youtube</h3>
+                    <div class="slider-overflow-wrapper">
+                        <div class="music__yt-slider">
+                            <ul>
+                                {% for item in youtube_content %}
+                                    <li class="music__yt-slider-item">
+                                        <a class="music__yt-card" href="{{ item.link }}" target="_blank">
+                                            <img src="{{ item.thumbnail.url }}" alt="asfad">
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if music_content %}
+                    <div class="music__tracks col-sm-12 col-md-6">
+                        <h3 class="music__tracks-title">Top Music</h3>
+                        <ul>
+                            {% for item in music_content %}
+                                <li class="hero__music-item music__tracks-item">
+                                    <a class="hero__music-inside-link" href="{{ item.link }}" target="_blank">
+                                        <div>
+                                            <img class="hero__music-img" src="{{ item.photo.url }}"
+                                                 alt="{{ item.title }}">
+                                        </div>
+                                        <p class="hero__music-title">{{ item.title }}</p>
+                                        <span>
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12.1712 12.0005L9.34277 9.17203L10.757 7.75781L14.9996 12.0005L10.757 16.2431L9.34277 14.8289L12.1712 12.0005Z"
+                                                      fill="white"/>
+                                            </svg>
+                                        </span>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                </div>
+            </div>
+        </section>
+        <section style="height: 300vh;">
             <p>asdfasdfasd</p>
         </section>
     </main>
