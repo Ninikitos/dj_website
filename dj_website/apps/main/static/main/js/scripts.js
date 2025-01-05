@@ -396,24 +396,34 @@ window.addEventListener('load', () => {
         const timeline = gsap.timeline({
             scrollTrigger: {
                 trigger: '.image-reveal',
-                start: 'top center+=140',
-                end: 'bottom-=600',
-                scrub: 2,
+                start: 'top center+=150',
+                end: 'bottom-=700',
+                scrub: 1,
                 pin: true,
-                ease: 'power2.inOut',
+                ease: 'none',
                 pinSpacing: false,
             }
         });
 
         // Animation for sliding up images
-        timeline.to('.image-reveal__slide', {
-            yPercent: -100,
-            stagger: 0.5,
-        }).to('body', {
-            backgroundColor: 'rgba(28, 24, 25, 1)',
-            duration: 1,
-            ease: 'power2.inOut',
-        }, '<');
+        timeline
+            .to('#image-reveal_1', {
+                yPercent: -90,
+                ease: 'none',
+            })
+            .to('#image-reveal_2', {
+                yPercent: -90,
+                ease: 'none',
+            }, '>0.1')
+            .to('#image-reveal_3', {
+                yPercent: -90,
+                ease: 'none',
+            }, '>0.1')
+            .to('body', {
+                backgroundColor: 'rgba(28, 24, 25, 1)',
+                duration: 1,
+                ease: 'power2.inOut',
+            }, '<');
 
         ScrollTrigger.refresh();
     });
