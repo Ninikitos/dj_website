@@ -19,7 +19,7 @@ class MusicLinkAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('title', 'price', 'link',)
+    list_display = ('title', 'price', 'discount_price', 'is_sale')
 
 
 @admin.register(ProductImage)

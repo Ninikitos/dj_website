@@ -86,8 +86,19 @@ class Product(models.Model):
         max_digits=5,
         decimal_places=2,
         validators=[MinValueValidator(0.00)])
+    discount_price = models.DecimalField(
+        blank=True,
+        max_digits=5,
+        decimal_places=2,
+        validators=[MinValueValidator(0.00)],
+        null=True,
+        help_text="Note: Don't forget to update Stripe Price."
+    )
     thumbnail_photo = models.ImageField(blank=True, upload_to="product_thumbnails/")
     link = models.URLField()
+    is_sale = models.BooleanField(default=False, null=True)
+    is_out_of_stack = models.BooleanField(default=False, null=True)
+
 
     def __str__(self):
         return self.title

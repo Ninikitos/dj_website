@@ -887,3 +887,183 @@ function musicAnimations(timeline) {
             ease: 'power2.out',
         }, '<');
 }
+
+
+// Shop
+// ====================================
+// Lightbox
+const productItems = document.querySelectorAll('.product');
+const lightbox = document.querySelector('.lightbox');
+const lightboxImg = document.querySelector('.lightbox__img');
+const thumbnailsContainer = document.querySelector('.thumbnails');
+const closeButton = document.querySelector('.controls__close');
+const shopTitle = document.querySelector('.shop__title');
+const shopSubTitle = document.querySelector('.shop__subtitle');
+const shopCards = document.querySelectorAll('.product');
+
+let currentImages = [];
+let currentIndex = 0;
+let lightBoxStartX = 0;
+let lightBoxEndX = 0;
+
+const shopTl = gsap.timeline({
+    scrollTrigger: {
+        trigger: shopTitle,
+        start: `top+=200`,
+        // start: `top-=750`,
+        toggleActions: 'play none none none'
+    }
+});
+
+shopTl
+    .fromTo(shopTitle, {
+        y: 10,
+        opacity: 0,
+        clipPath: 'inset(0 0 100% 0)',
+    }, {
+        y: 0,
+        opacity: 1,
+        clipPath: 'inset(0 0 0% 0)',
+        duration: 1,
+        ease: 'power2.in',
+    })
+    .fromTo(shopSubTitle, {
+        opacity: 0,
+        clipPath: 'inset(0 0 100% 0)',
+    }, {
+        opacity: 1,
+        clipPath: 'inset(0 0 0% 0)',
+        duration: 1,
+        ease: 'power2.out',
+    },)
+    .fromTo(shopCards, {
+            y: 40,
+            opacity: 0
+        },
+        {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            stagger: 0.2,
+            ease: 'power2.inOut'
+        }, '<')
+
+productItems.forEach((item) => {
+    item.addEventListener('click', () => {
+        const productImages = JSON.parse(item.getAttribute('data-images'));
+        currentImages = productImages;
+        currentIndex = 0;
+
+        if (productImages.length > 0) {
+            const lightBoxTl = gsap.timeline();
+            lightBoxTl.fromTo(
+                lightbox,
+                {opacity: 0},
+                {
+                    opacity: 1,
+                    duration: 0.5,
+                    ease: "power2.out",
+                })
+
+            populateLightbox(productImages);
+            lightbox.classList.add('active');
+        }
+    });
+});
+
+function populateLightbox(images) {
+    lightboxImg.src = images[0];
+    thumbnailsContainer.innerHTML = '';
+
+    images.forEach((image, index) => {
+        const thumbnail = document.createElement('img');
+        thumbnail.src = image;
+        thumbnail.alt = `thumbnail ${index + 1}`;
+        thumbnail.classList.toggle('active', index === 0);
+        thumbnail.addEventListener('click', () => {
+            currentIndex = index;
+            lightboxImg.src = image;
+            updateThumbnailHighlight(index);
+        });
+        thumbnailsContainer.appendChild(thumbnail);
+    });
+
+    addSwipeHandlers(images);
+}
+
+function addSwipeHandlers(images) {
+    lightboxImg.addEventListener('touchstart', (event) => {
+        lightBoxStartX = event.touches[0].clientX;
+    });
+
+    lightboxImg.addEventListener('touchmove', (event) => {
+        lightBoxEndX = event.touches[0].clientX;
+    });
+
+    lightboxImg.addEventListener('touchend', () => {
+        const diffX = lightBoxStartX - lightBoxEndX;
+
+        if (Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+                showNextImage(images);
+            } else {
+                showPrevImage(images);
+            }
+        }
+        lightBoxStartX = 0;
+        lightBoxEndX = 0;
+    });
+}
+
+function showNextImage(images) {
+    currentIndex = (currentIndex + 1) % images.length; // Loop back to the first image
+    lightboxImg.src = images[currentIndex];
+    updateThumbnailHighlight(currentIndex);
+}
+
+function showPrevImage(images) {
+    currentIndex = (currentIndex - 1 + images.length) % images.length; // Loop back to the last image
+    lightboxImg.src = images[currentIndex];
+    updateThumbnailHighlight(currentIndex);
+}
+
+// Update thumbnail highlight
+function updateThumbnailHighlight(index) {
+    const thumbnails = thumbnailsContainer.querySelectorAll('img');
+    thumbnails.forEach((thumb, i) => {
+        thumb.classList.toggle('active', i === index);
+    });
+}
+
+// Close Lightbox
+function closeLightbox() {
+    if (lightbox) {
+        lightbox.classList.remove('active');
+    }
+}
+
+// Close on click
+if (closeButton) {
+    closeButton.addEventListener('click', closeLightbox);
+}
+
+// Close on Escape key
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' || event.code === 'Escape') {
+        closeLightbox();
+    }
+});
+
+// Navigate Images
+document.querySelector('.controls__prev').addEventListener('click', () => {
+    navigateImages(-1);
+});
+document.querySelector('.controls__next').addEventListener('click', () => {
+    navigateImages(1);
+});
+
+function navigateImages(direction) {
+    currentIndex = (currentIndex + direction + currentImages.length) % currentImages.length;
+    lightboxImg.src = currentImages[currentIndex];
+    updateThumbnailHighlight(currentIndex);
+}
