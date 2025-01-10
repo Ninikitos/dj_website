@@ -136,7 +136,7 @@ h1 {
 }
 
 .hero__wrapper {
-    height: 80vh;
+    height: 90vh;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -233,6 +233,12 @@ p.hero__music-title {
 .hero__link-book {
     opacity: 0;
     transform: translateY(-20px);
+}
+
+.arrow__icon {
+    width: 37px;
+    height: 37px;
+    display: none;
 }
 
 /* Navigation */
@@ -553,14 +559,10 @@ header {
     border-radius: 5px;
 }
 
-.image-reveal__slide:not(#image-reveal_1) {
-    /*transform-origin: center;*/
-}
-
 #image-reveal_1 {
     position: absolute;
     z-index: 1;
-    width: 90%;
+    width: 100%;
 }
 
 #image-reveal_1 img {
@@ -728,8 +730,8 @@ header {
 .music__image-wrapper {
     position: relative;
     border-radius: 5px;
-    width: 204px;
-    height: 204px;
+    width: 250px;
+    height: 250px;
 }
 
 .music__image-wrapper img {
@@ -746,7 +748,7 @@ header {
     border-radius: 10px;
     background-color: var(--main-primary);
     color: var(--main-light);
-    transform: rotate(2deg) translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 .music__top {
@@ -1147,8 +1149,8 @@ header {
 }
 
 .book__card:not(:last-child) {
-     margin-bottom: 48px;
- }
+    margin-bottom: 48px;
+}
 
 .book__card {
     position: relative;
@@ -1200,7 +1202,7 @@ header {
 
 .book__hover-title-1 {
     text-align: right;
- }
+}
 
 .book__hover-content {
     display: flex;
@@ -1374,6 +1376,16 @@ header {
         margin-top: 24px;
     }
 
+    .hero__links {
+        font-size: 24px;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .arrow__icon {
+        display: inline-block;
+    }
+
     /* Menu */
     .menu__avatar {
         width: 150px;
@@ -1466,6 +1478,7 @@ header {
 
     /* About */
     .about {
+        padding-top: 48px;
         padding-bottom: 48px;
     }
 
@@ -1483,6 +1496,10 @@ header {
 
     .about__content-list {
         margin-bottom: 24px;
+    }
+
+    .about__content-text p {
+        margin-bottom: 0;
     }
 
     .cta-btn {
@@ -1503,9 +1520,6 @@ header {
     .music__image-wrapper {
         width: 80px;
         height: 80px;
-    }
-
-    .music__image-wrapper {
     }
 
     .music__slogan {
@@ -1545,6 +1559,10 @@ header {
     /* Shop */
     .shop {
         padding-top: 48px;
+    }
+
+    .shop__wrapper {
+        padding-bottom: 48px;
     }
 
     .shop__header {
@@ -1605,7 +1623,6 @@ header {
         z-index: 3;
     }
 
-    /* Shop */
     .lightbox__img-wrapper {
         max-width: 300px;
     }
@@ -1616,6 +1633,20 @@ header {
 
     .controls__next {
         display: none;
+    }
+
+    /* Book */
+    .book {
+        padding-top: 48px;
+        padding-bottom: 48px;
+    }
+
+    .book__header {
+        margin-bottom: 12px;
+    }
+
+    .book__subtitle {
+        margin-bottom: 18px;
     }
 
     @media (max-width: 575.98px) {
@@ -1644,7 +1675,7 @@ header {
         }
 
         .hero__wrapper {
-            height: 80vh;
+            height: 90vh;
             padding: 0 12px;
         }
 
@@ -1714,6 +1745,7 @@ header {
             transition: margin-right 0.3s ease;
         }
     }
+}
 
 
 

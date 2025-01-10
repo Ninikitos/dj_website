@@ -107,8 +107,7 @@ const tlLiveStreamText = gsap.timeline({
         // Trigger the animation when the title enters the viewport
         trigger: liveStreamTitle,
         start: 'top 90%',
-        toggleActions: 'play none none none',
-        markers: false,
+        toggleActions: 'play none none none'
     },
 });
 
@@ -175,8 +174,7 @@ liveStreamCards.forEach((card) => {
         scrollTrigger: {
             trigger: card,
             start: 'clamp(top 80%)',
-            toggleActions: 'play none none none',
-            markers: false,
+            toggleActions: 'play none none none'
         },
     });
 
@@ -954,8 +952,7 @@ ScrollTrigger.matchMedia({
             scrollTrigger: {
                 trigger: shopTitle,
                 start: "top-=700",
-                toggleActions: "play none none none",
-                markers: true
+                toggleActions: "play none none none"
             },
         });
 
@@ -1061,13 +1058,13 @@ function addSwipeHandlers(images) {
 }
 
 function showNextImage(images) {
-    currentIndex = (currentIndex + 1) % images.length; // Loop back to the first image
+    currentIndex = (currentIndex + 1) % images.length;
     lightboxImg.src = images[currentIndex];
     updateThumbnailHighlight(currentIndex);
 }
 
 function showPrevImage(images) {
-    currentIndex = (currentIndex - 1 + images.length) % images.length; // Loop back to the last image
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
     lightboxImg.src = images[currentIndex];
     updateThumbnailHighlight(currentIndex);
 }

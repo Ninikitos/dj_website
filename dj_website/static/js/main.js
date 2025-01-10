@@ -76,22 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     gsap.ticker.lagSmoothing(0)
 
-    // gsap.fromTo(
-    //     '.accent-text',
-    //     {opacity: 0},
-    //     {
-    //         opacity: 1,
-    //         duration: 1,
-    //         onStart: startCanvas,
-    //         scrollTrigger: {
-    //             trigger: '.shop',
-    //             start: 'bottom-=100',
-    //             once: true,
-    //
-    //         },
-    //     }
-    // );
-
     // Function to start the canvas
     function startCanvas() {
         loopCanvas = true;
@@ -132,9 +116,12 @@ function setup() {
 
     engine = Engine.create();
 
-    ground = Bodies.rectangle(width / 2, height - 505, width, 10, {
+    const groundHeightOffset = 0.66 * height;
+    const groundWidthtOffset = 0.2 / width;
+    ground = Bodies.rectangle(width / 2, height - groundHeightOffset, width - groundWidthtOffset, 10, {
         isStatic: true,
     });
+
     wallLeft = Bodies.rectangle(0, height / 2, 10, height, {
         isStatic: true,
     });
@@ -168,17 +155,20 @@ class Word {
         let pos = this.body.position;
         let angle = this.body.angle;
 
+        let isMobile = window.innerWidth <= 768; // Define a breakpoint for mobile
+        let scaleFactor = isMobile ? 0.6 : 1; // Reduce size by half on mobile
+
         push();
         translate(pos.x, pos.y);
         rotate(angle);
         rectMode(CENTER);
         fill("#E5E0E0");
         stroke("#0f0f0f");
-        strokeWeight(3);
-        rect(0, 0, this.word.length * 30, 80, 40);
+        strokeWeight(3 * scaleFactor); // Scale stroke weight
+        rect(0, 0, this.word.length * 30 * scaleFactor, 80 * scaleFactor, 40 * scaleFactor); // Scale rect size
         noStroke();
         fill("#0f0f0f");
-        textSize(40);
+        textSize(40 * scaleFactor); // Scale text size
         textAlign(CENTER, CENTER);
         text(this.word.toUpperCase(), 0, 0);
         pop();
@@ -194,7 +184,7 @@ function mouseMoved() {
             Body.applyForce(
                 word.body,
                 {x: word.body.position.x, y: word.body.position.y},
-                {x: random(-0.2, 0.2), y: random(-0.2, 0.2)}
+                {x: random(-0.3, 0.3), y: random(-0.3, 0.3)}
             );
         }
     }
