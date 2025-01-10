@@ -1163,10 +1163,12 @@ header {
 
 .book__card-private {
     background: url('../images/main/booking_poster_01.jpg') center no-repeat;
+    background-size: cover;
 }
 
 .book__card-live {
     background: url('../images/main/booking_poster_02.jpg') center no-repeat;
+    background-size: cover;
 }
 
 .book__card-title {
