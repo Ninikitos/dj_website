@@ -132,7 +132,7 @@ function setup() {
 
     engine = Engine.create();
 
-    ground = Bodies.rectangle(width / 2, height - 505, width, 10, {
+    ground = Bodies.rectangle(width / 2, height - 605, width, 10, {
         isStatic: true,
     });
     wallLeft = Bodies.rectangle(0, height / 2, 10, height, {
@@ -172,7 +172,7 @@ class Word {
         translate(pos.x, pos.y);
         rotate(angle);
         rectMode(CENTER);
-        fill(255);
+        fill("#C6C2C2");
         stroke("#0f0f0f");
         strokeWeight(3);
         rect(0, 0, this.word.length * 30, 80, 40);

@@ -7,12 +7,12 @@
 
 {% block content %}
     <!-- Preloader -->
-    {#    <div class="preloader">#}
-    {#        <h2>DJ DESTRUCT 305</h2>#}
-    {#        <div class="preloader__img-wrapper">#}
-    {#            <img src="{% static 'main/images/decor/vynil.png' %}" alt="black male portrait">#}
-    {#        </div>#}
-    {#    </div>#}
+    <div class="preloader">
+        <h2>DJ DESTRUCT 305</h2>
+        <div class="preloader__img-wrapper">
+            <img src="{% static 'main/images/decor/vynil.png' %}" alt="black male portrait">
+        </div>
+    </div>
 
     <!-- Header Section -->
     <header>
@@ -365,16 +365,23 @@
                                     <p>Alain</p>
                                 </li>
                                 <li class="about__content-item">
-                                    <p>Born</p>
-                                    <p>1990</p>
-                                </li>
-                                <li class="about__content-item">
                                     <p>From</p>
                                     <p>🇭🇹 Haiti</p>
                                 </li>
                                 <li class="about__content-item">
                                     <p>Years playing</p>
                                     <p>17</p>
+                                </li>
+                                <li class="about__content-item">
+                                    <p>Music</p>
+                                    <p>RnB</p>
+                                </li>
+                                <li class="about__content-item">
+                                    <p>Venues</p>
+                                    <p></p>
+                                </li>
+                                <li>
+                                    <a class="cta-btn about-cta" id="about" href="#">Book</a>
                                 </li>
                             </ul>
                         </div>
@@ -386,7 +393,6 @@
                                 for music goes beyond just playing tracks—it’s about creating
                                 an unforgettable vibe that connects with the crowd on a deeper level.
                             </p>
-                            <a class="cta-btn" id="about" href="#">Book</a>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-7">
@@ -626,112 +632,125 @@
                 </div>
             </div>
         </section>
-        <section class="accent-text" id="accent-text">
-        </section>
-        <section class="shop">
+        <section class="accent-text" id="accent-text"></section>
+        <section class="book">
             <div class="container">
-                <div class="shop__header">
-                    <h2 class="shop__title">Style That Matches<br>the Sound</h2>
-                    <p class="shop__subtitle">
-                        Rock the R&B party set aesthetic and let everyone
-                        know you’ve got better taste in music and style.
-                        You’re not just buying merch—you’re rapping the
-                        vibe that keeps it real.
-                    </p>
-                </div>
-                <div class="shop__wrapper">
-                    <ul class="row row-cols-2 row-cols-md-3">
-                        {% for item in products %}
-                            <li class="product gy-4" data-images='[
-                                {% for image in item.product_images.all %}
-                                    "{{ image.image.url }}"{% if not forloop.last %},{% endif %}
-                                {% endfor %}
-                            ]'>
-                                <div class="card shop__item">
-                                    <div class="shop__img-wrapper">
-                                        <img src="{{ item.thumbnail_photo.url }}" alt="{{ item.title }}f">
-                                        <span class="shop__img-background"></span>
+                <div class="title__sticky-wrapper row">
+                    <div class="title__sticky col-sm-12 col-md-5">
+                        <h2 class="live-stream__title book__header">Book a DJ<br>in Miami</h2>
+                        <span class="live-stream__subtitle">
+                            Stream DJ Destruct’s R&B TikTok Beats –
+                            Perfect Mixes for Every Vibe,
+                            from Unwinding to Partying.
+                        </span>
+                    </div>
+                    <div class="col-sm-12 col-md-7">
+                        <p class="section__text live-stream__text">
+                            Looking to book a DJ in Miami? DJ Destruct
+                            brings the hottest mixes, remixes, and R&B
+                            TikTok beats to your next event. From laid-back
+                            gatherings to high-energy nights out, DJ Destruct
+                            sets the perfect vibe for every Miami occasion.
+                        </p>
+                        <div class="book__cards">
+                            <div class="book__card book__card-private">
+                                <h2 class="book__card-title">Private Party</h2>
+                                <div class="book__hover">
+                                    <h3 class="book__hover-title">Private</h3>
+                                    <h3 class="book__hover-title book__hover-title-1">Party</h3>
+                                    <div class="book__hover-content row">
+                                        <div class="col-5">
+                                            <p>
+                                                DJ Destruct brings the music, energy, and
+                                                vibes to keep your guests dancing and
+                                                having a great time.
+                                            </p>
+                                        </div>
+                                        <div class="col-7 book__hover-img-wrapper">
+                                            <img src="{% static 'main/images/main/book-avatart01.png' %}"
+                                                 alt="black male with a headset">
+                                        </div>
                                     </div>
-                                    <span class="shop__actions">
-                                        <div class="shop__deals">
-                                            {% if item.is_sale %}
-                                                <p class="shop__sale">Sale</p>
-                                            {% endif %}
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div style="height: 1px; visibility: hidden;"></div>
                                         </div>
-                                        <div class="shop__action-cta">
-                                            {% if item.is_sale %}
-                                                <div class="shop__discounts">
-                                                    <div>
-                                                        <div>
-                                                            <span class="shop__prod-title"
-                                                                  style="font-size: 12px">{{ item.title }}</span>
-                                                        </div>
-                                                        <div>
-                                                            <span class="shop__price shop__price-discount">${{ item.discount_price }}</span>
-                                                            <span class="shop__price shop__price-discounted">${{ item.price }}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            {% else %}
-                                                <div>
-                                                    <div>
-                                                        <span style="font-size: 12px">{{ item.title }}</span>
-                                                    </div>
-                                                    <div>
-                                                        <span class="shop__price">${{ item.price }}</span>
-                                                    </div>
-                                                </div>
-                                            {% endif %}
-
-                                            {% if item.is_out_of_stack %}
-                                                <a class="shop__cta-disable" href="#">Out of Stock</a>
-                                            {% else %}
-                                                <a class="shop__cta" href="{{ item.link }}" target="_blank">Buy</a>
-                                            {% endif %}
-                                        </div>
-                                    </span>
+                                        <ul class="col-7">
+                                            <li class="book__info">
+                                                <p>Music</p>
+                                                <span>Rnb</span>
+                                            </li>
+                                            <li class="book__info">
+                                                <p>Time</p>
+                                                <span>2hr</span>
+                                            </li>
+                                            <li class="book__info">
+                                                <p>Equipment</p>
+                                                <span>Personal</span>
+                                            </li>
+                                            <li class="book__info">
+                                                <p>Vibes</p>
+                                                <span>Gucci</span>
+                                            </li>
+                                            <li>
+                                                <a class="cta-btn book__cta" href="#">Book</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-            <div class="lightbox">
-                <div class="lightbox__wrapper">
-                    <span class="controls__prev">
-                            <svg width="21" height="36" viewBox="0 0 31 46" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M15.4999 22.9998L31 38.3333L23.2498 46L1.72332e-06 22.9998L23.2498 -5.64085e-07L31 7.66658L15.4999 22.9998Z"
-                                      fill="white"/>
-                            </svg>
-                        </span>
-                    <span class="controls__close">
-                            <svg width="40" height="40" viewBox="0 0 73 73" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M32.1986 36.5002L8.49512 12.7967L12.7967 8.49512L36.5001 32.1984L60.2035 8.49512L64.5051 12.7967L40.8017 36.5002L64.5051 60.2033L60.2035 64.5051L36.5001 40.8017L12.7967 64.5051L8.49512 60.2033L32.1986 36.5002Z"
-                                      fill="white"/>
-                            </svg>
-                        </span>
-                    <span class="controls__next">
-                            <svg width="21" height="36" viewBox="0 0 31 46" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M15.5001 23.0002L0 7.6667L7.75016 0L31 23.0002L7.75016 46L0 38.3334L15.5001 23.0002Z"
-                                      fill="white"/>
-                            </svg>
-                        </span>
-                    <div class="lightbox__img-wrapper">
-                        <img class="lightbox__img" src="" alt="Preview">
-                    </div>
-                    <div class="thumbnails"></div>
-                    <div class="decor_one-wrapper">
-                        <span class="decor_one"></span>
-                    </div>
-                    <div class="decor_one-wrapper">
-                        <span class="decor__two"></span>
+                            </div>
+                            <div class="book__card book__card-live">
+                                <h2 class="book__card-title">Private Party</h2>
+                                <div class="book__hover">
+                                    <h3 class="book__hover-title">Virtual</h3>
+                                    <h3 class="book__hover-title book__hover-title-1">Gig</h3>
+                                    <div class="book__hover-content row">
+                                        <div class="col-5">
+                                            <p>
+                                                Perfect for remote parties,
+                                                team events, or just vibing with
+                                                friends from anywhere.
+                                            </p>
+                                        </div>
+                                        <div class="col-7 book__hover-img-wrapper">
+                                            <img src="{% static 'main/images/main/book-avatart02.png' %}"
+                                                 alt="black male with a headset">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div style="height: 1px; visibility: hidden;"></div>
+                                        </div>
+                                        <ul class="col-7">
+                                            <li class="book__info">
+                                                <p>Music</p>
+                                                <span>Rnb</span>
+                                            </li>
+                                            <li class="book__info">
+                                                <p>Time</p>
+                                                <span>2hr</span>
+                                            </li>
+                                            <li class="book__info">
+                                                <p>Equipment</p>
+                                                <span>Personal</span>
+                                            </li>
+                                            <li class="book__info">
+                                                <p>Platform</p>
+                                                <span>TikTok/Youtube</span>
+                                            </li>
+                                            <li>
+                                                <a class="cta-btn book__cta" href="#">Book</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+
     </main>
 {% endblock %}
 

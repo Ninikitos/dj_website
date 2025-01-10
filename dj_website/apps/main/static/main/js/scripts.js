@@ -906,47 +906,92 @@ let currentIndex = 0;
 let lightBoxStartX = 0;
 let lightBoxEndX = 0;
 
-const shopTl = gsap.timeline({
-    scrollTrigger: {
-        trigger: shopTitle,
-        start: `top+=200`,
-        // start: `top-=750`,
-        toggleActions: 'play none none none'
-    }
-});
+ScrollTrigger.matchMedia({
+    "(min-width: 768px)": function () {
+        const shopTlDesktop = gsap.timeline({
+            scrollTrigger: {
+                trigger: shopTitle,
+                start: "top+=200",
+                toggleActions: "play none none none",
+            },
+        });
 
-shopTl
-    .fromTo(shopTitle, {
-        y: 10,
-        opacity: 0,
-        clipPath: 'inset(0 0 100% 0)',
-    }, {
-        y: 0,
-        opacity: 1,
-        clipPath: 'inset(0 0 0% 0)',
-        duration: 1,
-        ease: 'power2.in',
-    })
-    .fromTo(shopSubTitle, {
-        opacity: 0,
-        clipPath: 'inset(0 0 100% 0)',
-    }, {
-        opacity: 1,
-        clipPath: 'inset(0 0 0% 0)',
-        duration: 1,
-        ease: 'power2.out',
-    },)
-    .fromTo(shopCards, {
-            y: 40,
-            opacity: 0
-        },
-        {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            stagger: 0.2,
-            ease: 'power2.inOut'
-        }, '<')
+        shopTlDesktop
+            .fromTo(shopTitle, {
+                y: 10,
+                opacity: 0,
+                clipPath: "inset(0 0 100% 0)",
+            }, {
+                y: 0,
+                opacity: 1,
+                clipPath: "inset(0 0 0% 0)",
+                duration: 1,
+                ease: "power2.in",
+            })
+            .fromTo(shopSubTitle, {
+                opacity: 0,
+                clipPath: "inset(0 0 100% 0)",
+            }, {
+                opacity: 1,
+                clipPath: "inset(0 0 0% 0)",
+                duration: 1,
+                ease: "power2.out",
+            })
+            .fromTo(shopCards, {
+                y: 40,
+                opacity: 0,
+            }, {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                stagger: 0.2,
+                ease: "power2.inOut",
+            }, "<");
+    },
+
+    "(max-width: 767px)": function () {
+        const shopTlMobile = gsap.timeline({
+            scrollTrigger: {
+                trigger: shopTitle,
+                start: "top-=700",
+                toggleActions: "play none none none",
+                markers: true
+            },
+        });
+
+        shopTlMobile
+            .fromTo(shopTitle, {
+                y: 20,
+                opacity: 0,
+                clipPath: "inset(0 0 100% 0)",
+            }, {
+                y: 0,
+                opacity: 1,
+                clipPath: "inset(0 0 0% 0)",
+                duration: 1,
+                ease: "power2.in",
+            })
+            .fromTo(shopSubTitle, {
+                opacity: 0,
+                clipPath: "inset(0 0 100% 0)",
+            }, {
+                opacity: 1,
+                clipPath: "inset(0 0 0% 0)",
+                duration: 1,
+                ease: "power2.out",
+            })
+            .fromTo(shopCards, {
+                y: 50,
+                opacity: 0,
+            }, {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                stagger: 0.3,
+                ease: "power2.inOut",
+            }, "<");
+    },
+});
 
 productItems.forEach((item) => {
     item.addEventListener('click', () => {
@@ -1067,3 +1112,27 @@ function navigateImages(direction) {
     lightboxImg.src = currentImages[currentIndex];
     updateThumbnailHighlight(currentIndex);
 }
+
+document.querySelectorAll('.book__card').forEach(card => {
+    const hoverContent = card.querySelector('.book__hover');
+
+    // Mouse enter animation
+    card.addEventListener('mouseenter', () => {
+        gsap.to(hoverContent, {
+            opacity: 1,
+            visibility: "visible",
+            duration: 0.5,
+            ease: "power2.out",
+        });
+    });
+
+    // Mouse leave animation
+    card.addEventListener('mouseleave', () => {
+        gsap.to(hoverContent, {
+            opacity: 0,
+            visibility: "hidden",
+            duration: 0.5,
+            ease: "power2.in",
+        });
+    });
+});
