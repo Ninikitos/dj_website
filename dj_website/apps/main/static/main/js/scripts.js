@@ -1216,7 +1216,8 @@ tlBooking.fromTo(
 const footerDecorOne = document.querySelector('.footer__top p:first-child');
 const footerDecorTwo = document.querySelector('.footer__top p:last-child');
 const footerImage = document.querySelector('.footer__img-wrapper');
-const footerBottom = document.querySelectorAll('.footer__bottom');
+const footerSocials = document.querySelectorAll('.socials__footer li');
+const footerNav = document.querySelectorAll('.footer__menu li');
 let isMobileFooter = window.innerWidth <= 768;
 
 const footerTl = gsap.timeline({
@@ -1251,10 +1252,29 @@ footerTl.fromTo(footerDecorOne,
             ease: 'power2.out'
         },
         '<0.5')
-    .fromTo(footerBottom,
-        {opacity: 0},
+    .fromTo(footerSocials,
         {
+            y: 10,
+            opacity: 0
+
+        },
+        {
+            y: 0,
             opacity: 1,
-            duration: 1,
+            duration: .5,
+            stagger: 0.4,
             ease: 'power2.out'
-        });
+        }, '<')
+    .fromTo(footerNav,
+    {
+        y: 20,
+        opacity: 0
+
+    },
+    {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.4,
+        ease: 'power2.out'
+    }, '<');

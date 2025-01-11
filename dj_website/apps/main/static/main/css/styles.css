@@ -1161,6 +1161,12 @@ header {
     height: 300px;
 }
 
+.p5Canvas {
+    width: 100vw;
+    height: 300px;
+    display: block;
+}
+
 .accent-text__wrapper {
     display: flex;
     justify-content: space-between;
@@ -1851,7 +1857,7 @@ header {
     }
 
     .book__card {
-        height: 670px;
+        height: 75vh;
     }
 
     .book__card-title {
