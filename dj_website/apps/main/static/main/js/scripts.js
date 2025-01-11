@@ -436,7 +436,7 @@ const aboutSubtitle = document.querySelector('.about__subtitle');
 const aboutTextList = document.querySelectorAll('.about__content-item');
 const aboutImage = document.querySelector('.about__content-img');
 const aboutTextDescription = document.querySelector('.about__content-text p');
-const aboutCTA = document.querySelector('#about');
+const aboutCTA = document.querySelector('#about-cta');
 const aboutFacts = document.querySelectorAll('.about__info-item');
 
 const aboutMM = gsap.matchMedia();
@@ -447,7 +447,8 @@ aboutMM.add('(min-width: 768px)', () => {
         scrollTrigger: {
             trigger: '.about',
             start: 'clamp(top+=500)',
-            toggleActions: 'play none none none'
+            toggleActions: 'play none none none',
+            markers: true
         },
     });
 
