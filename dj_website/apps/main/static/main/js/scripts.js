@@ -54,7 +54,6 @@ tlMenu.to(menuBackground, {
 
 // Open menu on click
 menuOpenBtn.addEventListener('click', function () {
-    // Play the timeline
     tlMenu.play();
 });
 
@@ -63,7 +62,6 @@ menuCloseBtn.addEventListener('click', function () {
     // tlMenu.progress(1); // Jump to the end of the opening animation if it's not finished
     // tlMenu.timeScale(2).reverse(); // Faster reverse
     tlMenu.reverse();
-
 });
 
 
@@ -117,13 +115,13 @@ tlLiveStreamText.fromTo(
     {
         y: 10,
         opacity: 0,
-        clipPath: 'inset(100% 0 0 0)'
+        clipPath: 'inset(0 0 100% 0)'
     },
     {
         y: 0,
         opacity: 1,
         duration: 1.5,
-        clipPath: 'inset(0% 0 0 0)',
+        clipPath: 'inset(0 0 0% 0)',
         ease: 'power2.out',
     }
 );
@@ -150,12 +148,12 @@ tlLiveStreamText.fromTo(
     {
         y: 10,
         opacity: 0,
-        clipPath: 'inset(0 0 100% 0)'
+        clipPath: 'inset(100% 0 0 0)'
     },
     {
         y: 0,
         opacity: 1,
-        clipPath: 'inset(0 0 0% 0)',
+        clipPath: 'inset(0% 0 0 0)',
         duration: 0.8,
         ease: 'power2.out',
     },
@@ -455,12 +453,12 @@ aboutMM.add('(min-width: 768px)', () => {
         .fromTo(aboutTitle, {
             y: 10,
             opacity: 0,
-            clipPath: 'inset(100% 0 0 0)',
+            clipPath: 'inset(0 0 100% 0)',
         }, {
             y: 0,
             opacity: 1,
             duration: 1.5,
-            clipPath: 'inset(0% 0 0 0)',
+            clipPath: 'inset(0 0 0% 0)',
             ease: 'power2.out',
         })
         .fromTo(aboutSubtitle, {
@@ -735,7 +733,7 @@ const musicSubtitle = document.querySelector('.music__subtitle');
 const musicYtTitle = document.querySelector('.music__yt-title');
 const musicYtSliderItems = document.querySelectorAll('.music__yt-slider-item');
 const musicTracksTitle = document.querySelector('.music__tracks-title');
-const musicTracksItems = document.querySelectorAll('.hero__music-item.music__tracks-item');
+const musicTracksItems = document.querySelectorAll('.music__tracks-item');
 
 const musicMM = gsap.matchMedia()
 musicMM.add('(min-width: 768px)', () => {
@@ -1133,3 +1131,125 @@ document.querySelectorAll('.book__card').forEach(card => {
         });
     });
 });
+
+// Booking
+// ====================================
+const bookingTitle = document.querySelector('.live-stream__title.book__header');
+const bookingSubtitle = document.querySelector('.live-stream__subtitle.book__subtitle');
+const bookingText = document.querySelector('.section__text.live-stream__text.book__text');
+const bookingCards = document.querySelectorAll('.book__card');
+let isMobile = window.innerWidth <= 768;
+
+// Create a timeline for the text elements
+const tlBooking = gsap.timeline({
+    scrollTrigger: {
+        // Trigger the animation when the title enters the viewport
+        trigger: bookingTitle,
+        start: isMobile ? 'top-=600' : 'top+=300',
+        toggleActions: 'play none none none'
+    },
+});
+
+// Animate the title
+tlBooking.fromTo(
+    bookingTitle,
+    {
+        y: 10,
+        opacity: 0,
+        clipPath: 'inset(0 0 100% 0)'
+    },
+    {
+        y: 0,
+        opacity: 1,
+        duration: 1.5,
+        clipPath: 'inset(0 0 0% 0)',
+        ease: 'power2.out',
+    }
+)
+    .fromTo(
+        bookingText,
+        {
+            y: 10,
+            opacity: 0,
+        },
+        {
+            y: 0,
+            opacity: 1,
+            duration: 1.5,
+            ease: 'power2.out',
+        },
+        '<0.2'
+    ).fromTo(
+    bookingSubtitle,
+    {
+        y: 10,
+        opacity: 0,
+        clipPath: 'inset(0 0 100% 0)'
+    },
+    {
+        y: 0,
+        opacity: 1,
+        clipPath: 'inset(0 0 0% 0)',
+        duration: 0.8,
+        ease: 'power2.out',
+    },
+    '<0.2'
+).fromTo(
+    bookingCards, {
+        clipPath: 'inset(0 0 100% 0)'
+    },
+    {
+        clipPath: 'inset(0 0 0% 0)',
+        duration: 1.5,
+        ease: 'power2.inOut'
+    },
+    '+=0.2'
+);
+
+
+// Footer
+// ====================================
+const footerDecorOne = document.querySelector('.footer__top p:first-child');
+const footerDecorTwo = document.querySelector('.footer__top p:last-child');
+const footerImage = document.querySelector('.footer__img-wrapper');
+const footerBottom = document.querySelectorAll('.footer__bottom');
+
+const footerTl = gsap.timeline({
+    scrollTrigger: {
+        trigger: footerDecorOne,
+        start: 'top+=100',
+        toggleActions: 'play none none none'
+    }
+});
+
+footerTl.fromTo(footerDecorOne,
+    {opacity: 0},
+    {
+        opacity: 1,
+        duration: 0.5,
+        ease: 'power2.inOut'
+    })
+    .fromTo(footerDecorTwo,
+        {opacity: 0},
+        {
+            opacity: 1,
+            duration: 0.5,
+            ease: 'power2.inOut'
+        }, '<')
+    .fromTo(footerImage,
+        {
+            clipPath: 'inset(0 0 100% 0)'
+        },
+        {
+            clipPath: 'inset(0 0 0% 0)',
+            duration: 2,
+            ease: 'power2.out'
+        },
+        '<0.5')
+    .fromTo(footerBottom,
+        {opacity: 0},
+        {
+            opacity: 1,
+            duration: 1,
+            ease: 'power2.out'
+        });

@@ -11,8 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const heroMenuOpenWrapper = document.querySelector('.header__menu-wrapper');
     const heroTitle = document.querySelector('.hero__title');
     const heroSubTitle = document.querySelector('.hero__subtitle');
-    const heroLinkTikTok = document.querySelector('.hero__link-tiktok');
-    const heroLinkBook = document.querySelector('.hero__link-book');
+    const heroBook = document.querySelector('.cta-btn.book__cta');
     const heroMusicListenAll = document.querySelector('.hero__music-link');
     const heroMusicItems = document.querySelectorAll('.hero__music-item');
 
@@ -54,10 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .to(heroSubTitle, {
                 duration: 1, clipPath: 'inset(0% 0 0 0)', ease: 'power2.inOut',
             }, '-=1')
-            .to(heroLinkTikTok, {
-                duration: 1, opacity: 1, y: 0, ease: 'power2.inOut',
-            }, '-=1')
-            .to(heroLinkBook, {
+            .to(heroBook, {
                 duration: 1, opacity: 1, y: 0, ease: 'power2.inOut',
             }, '-=1')
             .to(heroMusicItems, {
@@ -97,17 +93,20 @@ let wordsToDisplay = [
     "DJ Destruct 305",
     "Miami",
     "From Haiti",
-    "RNB",
-    "Music",
+    "RnB Music",
+    "Vinyl",
     "Live",
     "Vibe",
     "DJ Destruct 305",
     "Miami",
     "From Haiti",
-    "RNB",
+    "Book me",
     "Music",
     "Live",
-    "Vibe"
+    "Vibe Vibe Vibe",
+    "DJ Destruct 305",
+    "TikTok",
+    "Instagram"
 ];
 
 function setup() {

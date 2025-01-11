@@ -76,30 +76,17 @@
     <title>LIVE TikTok DJ in Miami | Smooth R&B Beats & Virtual Vibes</title>
 </head>
 <body>
-<main>
-    <!-- Main content Section -->
     {% block content %}{% endblock %}
+    <!-- GSAP Core -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <!-- GSAP ScrollTrigger -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <!-- GSAP TextPlugin -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/TextPlugin.min.js"></script>
 
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2024 Your Company. All rights reserved.</p>
-    </footer>
-</main>
+    <!-- Main scripts -->
+    <script src="{% static 'js/main.js' %}"></script>
 
-<!-- GSAP Core -->
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<!-- GSAP ScrollTrigger -->
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-<!-- GSAP TextPlugin -->
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/TextPlugin.min.js"></script>
-
-<!-- Main scripts -->
-<script src="{% static 'js/main.js' %}"></script>
-
-<script>
-
-</script>
-
-{% block js %}{% endblock %}
+    {% block js %}{% endblock %}
 </body>
 </html>
