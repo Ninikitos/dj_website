@@ -130,7 +130,7 @@ img {
     content: '';
     position: absolute;
     width: 100%;
-    transform: scaleX(0) translateY(0px);
+    transform: scaleX(0) scaleY(1);
     height: 0.1em;
     bottom: 0;
     left: 0;
@@ -145,7 +145,7 @@ img {
 }
 
 .link:hover::after {
-    transform: scaleX(1) translateY(0px);
+    transform: scaleX(1) scaleY(1);
     transform-origin: bottom left;
     z-index: 3;
 }
@@ -156,11 +156,11 @@ img {
     }
 
     h2 {
-        letter-spacing: .02rem;
+        letter-spacing: .01rem;
     }
 
     h3 {
-        letter-spacing: .02rem;
+        letter-spacing: .01rem;
     }
 }
 

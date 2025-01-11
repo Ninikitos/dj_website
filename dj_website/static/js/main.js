@@ -115,9 +115,9 @@ function setup() {
 
     engine = Engine.create();
 
-    const groundHeightOffset = 0.66 * height;
-    const groundWidthtOffset = 0.2 / width;
-    ground = Bodies.rectangle(width / 2, height - groundHeightOffset, width - groundWidthtOffset, 10, {
+    const groundHeightOffset = 0.65 * height;
+    const groundWidthOffset = 0.2 / width;
+    ground = Bodies.rectangle(width / 2, height - groundHeightOffset, width - groundWidthOffset, 10, {
         isStatic: true,
     });
 

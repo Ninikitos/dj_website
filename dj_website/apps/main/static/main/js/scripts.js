@@ -13,7 +13,6 @@ window.addEventListener('scroll', () => {
         // Scrolling up - show navbar
         navbar.style.transform = 'translateY(0)';
     }
-
     lastScrollY = currentScrollY;
 });
 
@@ -52,6 +51,12 @@ tlMenu.to(menuBackground, {
     ease: 'power2.inOut'
 }, '-=1');
 
+menuNavigationItems.forEach(link => {
+    link.addEventListener('click', () => {
+        tlMenu.reverse(); // Close the menu
+    });
+});
+
 // Open menu on click
 menuOpenBtn.addEventListener('click', function () {
     tlMenu.play();
@@ -59,8 +64,6 @@ menuOpenBtn.addEventListener('click', function () {
 
 // Close menu on click
 menuCloseBtn.addEventListener('click', function () {
-    // tlMenu.progress(1); // Jump to the end of the opening animation if it's not finished
-    // tlMenu.timeScale(2).reverse(); // Faster reverse
     tlMenu.reverse();
 });
 
@@ -1138,14 +1141,14 @@ const bookingTitle = document.querySelector('.live-stream__title.book__header');
 const bookingSubtitle = document.querySelector('.live-stream__subtitle.book__subtitle');
 const bookingText = document.querySelector('.section__text.live-stream__text.book__text');
 const bookingCards = document.querySelectorAll('.book__card');
-let isMobile = window.innerWidth <= 768;
+let isMobileBooking = window.innerWidth <= 768;
 
 // Create a timeline for the text elements
 const tlBooking = gsap.timeline({
     scrollTrigger: {
         // Trigger the animation when the title enters the viewport
         trigger: bookingTitle,
-        start: isMobile ? 'top-=600' : 'top+=300',
+        start: isMobileBooking ? 'top-=650' : 'top+=50',
         toggleActions: 'play none none none'
     },
 });
@@ -1213,11 +1216,12 @@ const footerDecorOne = document.querySelector('.footer__top p:first-child');
 const footerDecorTwo = document.querySelector('.footer__top p:last-child');
 const footerImage = document.querySelector('.footer__img-wrapper');
 const footerBottom = document.querySelectorAll('.footer__bottom');
+let isMobileFooter = window.innerWidth <= 768;
 
 const footerTl = gsap.timeline({
     scrollTrigger: {
         trigger: footerDecorOne,
-        start: 'top+=100',
+        start: isMobileFooter ? 'top-=650' : 'top+=300',
         toggleActions: 'play none none none'
     }
 });
