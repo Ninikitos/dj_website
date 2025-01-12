@@ -1031,33 +1031,46 @@ function populateLightbox(images) {
         thumbnailsContainer.appendChild(thumbnail);
     });
 
+    currentImages = images;
+
     currentIndex = 0;
     addSwipeHandlers(images);
 }
 
-function addSwipeHandlers(images) {
-    lightboxImg.addEventListener('touchstart', (event) => {
-        lightBoxStartX = event.touches[0].clientX;
-    });
+function addSwipeHandlers() {
+    // Remove previous handlers if they exist
+    lightboxImg.removeEventListener('touchstart', handleTouchStart);
+    lightboxImg.removeEventListener('touchmove', handleTouchMove);
+    lightboxImg.removeEventListener('touchend', handleTouchEnd);
 
-    lightboxImg.addEventListener('touchmove', (event) => {
+    // Define handlers locally for proper reattachment
+    function handleTouchStart(event) {
+        lightBoxStartX = event.touches[0].clientX;
+    }
+
+    function handleTouchMove(event) {
         lightBoxEndX = event.touches[0].clientX;
         event.preventDefault();
-    });
+    }
 
-    lightboxImg.addEventListener('touchend', () => {
+    function handleTouchEnd() {
         const diffX = lightBoxStartX - lightBoxEndX;
 
         if (Math.abs(diffX) > 50) {
             if (diffX > 0) {
-                showNextImage(images);
+                showNextImage(currentImages);
             } else {
-                showPrevImage(images);
+                showPrevImage(currentImages);
             }
         }
         lightBoxStartX = 0;
         lightBoxEndX = 0;
-    });
+    }
+
+    // Add new handlers
+    lightboxImg.addEventListener('touchstart', handleTouchStart);
+    lightboxImg.addEventListener('touchmove', handleTouchMove);
+    lightboxImg.addEventListener('touchend', handleTouchEnd);
 }
 
 function showNextImage(images) {
@@ -1313,15 +1326,15 @@ footerTl.fromTo(footerDecorOne,
             ease: 'power2.out'
         }, '<')
     .fromTo(footerNav,
-    {
-        y: 20,
-        opacity: 0
+        {
+            y: 20,
+            opacity: 0
 
-    },
-    {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        stagger: 0.4,
-        ease: 'power2.out'
-    }, '<');
+        },
+        {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            stagger: 0.4,
+            ease: 'power2.out'
+        }, '<');
