@@ -1,3 +1,5 @@
+import { disableScrolling, enableScrolling } from '../../../../../static/js/lenis-setup.js';
+
 // Hide Navbar on scroll events
 // ====================================
 const navbar = document.querySelector('.navbar');
@@ -1009,6 +1011,7 @@ productItems.forEach((item) => {
                 })
 
             populateLightbox(productImages);
+            disableScrolling();
             lightbox.classList.add('active');
         }
     });
@@ -1096,6 +1099,7 @@ function updateThumbnailHighlight(index) {
 // Close Lightbox
 function closeLightbox() {
     if (lightbox) {
+        enableScrolling();
         lightbox.classList.remove('active');
     }
 }

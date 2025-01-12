@@ -63,11 +63,13 @@ h1 {
 h2 {
     font-size: 80px;
     line-height: 1;
+    letter-spacing: .001rem;
 }
 
 h3 {
     font-size: 32px;
     line-height: 1.3;
+    letter-spacing: .001rem;
 }
 
 .font__display {

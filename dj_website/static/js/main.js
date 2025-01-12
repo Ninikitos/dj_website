@@ -1,3 +1,5 @@
+import { disableScrolling, enableScrolling } from './lenis-setup.js';
+
 document.addEventListener("DOMContentLoaded", () => {
     gsap.registerPlugin(ScrollTrigger);
     gsap.registerPlugin(Observer);
@@ -15,7 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const heroMusicListenAll = document.querySelector('.hero__music-link');
     const heroMusicItems = document.querySelectorAll('.hero__music-item');
 
-    const tlPreloader = gsap.timeline();
+    const tlPreloader = gsap.timeline({
+        onStart: disableScrolling
+    });
+
     tlPreloader.to(preloaderText, {
         duration: 1.5, opacity: 1, scale: 1.2, ease: "power2.out",
     })
@@ -29,8 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
             duration: 1, opacity: 0, scale: 1.1, ease: "power2.in", delay: 0.5
         })
         .to(preloader, {
-            duration: 1, y: "-100%", ease: "power2.inOut", onComplete: () => {
-                preloader.style.display = "none";
+            duration: 1, y: "-100%", ease: "power2.inOut",
+            onComplete: () => {
+                preloader.style.visibility = "hidden";
+                document.body.classList.remove('no-scroll');
+                enableScrolling()
             },
         });
 
@@ -63,14 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 duration: 1, opacity: 1, x: 0, ease: 'power2.inOut'
             }, '-=2');
     });
-
-    // Smooth scroll
-    const lenis = new Lenis()
-    lenis.on('scroll', ScrollTrigger.update)
-    gsap.ticker.add((time) => {
-        lenis.raf(time * 1000)
-    })
-    gsap.ticker.lagSmoothing(0)
 
     // Function to start the canvas
     function startCanvas() {
