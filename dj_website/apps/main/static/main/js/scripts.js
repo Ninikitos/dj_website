@@ -1031,6 +1031,7 @@ function populateLightbox(images) {
         thumbnailsContainer.appendChild(thumbnail);
     });
 
+    currentIndex = 0;
     addSwipeHandlers(images);
 }
 
@@ -1041,6 +1042,7 @@ function addSwipeHandlers(images) {
 
     lightboxImg.addEventListener('touchmove', (event) => {
         lightBoxEndX = event.touches[0].clientX;
+        event.preventDefault();
     });
 
     lightboxImg.addEventListener('touchend', () => {
@@ -1254,7 +1256,6 @@ bookSlider.addEventListener('click', (e) => {
         bookingMovedDuringDrag = false;
     }
 });
-
 
 
 // Footer
