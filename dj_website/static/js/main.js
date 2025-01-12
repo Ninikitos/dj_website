@@ -110,30 +110,35 @@ let wordsToDisplay = [
 ];
 
 function setup() {
-    const canvas = createCanvas(windowWidth, windowHeight);
+    const section = document.querySelector('#accent-text');
+    const canvas = createCanvas(section.clientWidth, section.clientHeight);
     canvas.parent('accent-text');
 
     engine = Engine.create();
 
-    const groundHeightOffset = 0.65 * height;
-    const groundWidthOffset = 0.2 / width;
-    ground = Bodies.rectangle(width / 2, height - groundHeightOffset, width - groundWidthOffset, 10, {
-        isStatic: true,
-    });
+    const sectionHeight = section.clientHeight;
+    const sectionWidth = section.clientWidth;
 
-    wallLeft = Bodies.rectangle(0, height / 2, 10, height, {
-        isStatic: true,
-    });
-    wallRight = Bodies.rectangle(width, height / 2, 10, height, {
-        isStatic: true,
-    });
+    const groundY = sectionHeight - 5;
+
+    ground = Bodies.rectangle(
+        sectionWidth / 2,
+        groundY,
+        sectionWidth,
+        10,
+        {isStatic: true}
+    );
+
+    wallLeft = Bodies.rectangle(0, sectionHeight / 2, 10, sectionHeight, {isStatic: true});
+    wallRight = Bodies.rectangle(sectionWidth, sectionHeight / 2, 10, sectionHeight, {isStatic: true});
 
     World.add(engine.world, [ground, wallLeft, wallRight]);
 
     for (let i = 0; i < wordsToDisplay.length; i++) {
-        words.push(new Word(random(width), -200, wordsToDisplay[i]));
+        words.push(new Word(random(sectionWidth), -200, wordsToDisplay[i]));
     }
 }
+
 
 function draw() {
     background("#F23038");

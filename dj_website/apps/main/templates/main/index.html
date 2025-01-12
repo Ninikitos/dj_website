@@ -7,12 +7,12 @@
 
 {% block content %}
     <!-- Preloader -->
-{#    <div class="preloader">#}
-{#        <h2>DJ DESTRUCT 305</h2>#}
-{#        <div class="preloader__img-wrapper">#}
-{#            <img src="{% static 'main/images/decor/vynil.png' %}" alt="black male portrait">#}
-{#        </div>#}
-{#    </div>#}
+    <div class="preloader">
+        <h2>DJ DESTRUCT 305</h2>
+        <div class="preloader__img-wrapper">
+            <img src="{% static 'main/images/decor/vynil.png' %}" alt="black male portrait">
+        </div>
+    </div>
 
     <!-- Header -->
     <header>
@@ -89,7 +89,7 @@
                                             </svg>
                                         </a>
                                     </li>
-                                    <li>
+                                    <li id="social__youtube-wrapper">
                                         <a class="social__item" href="https://www.youtube.com/djdestruct305"
                                            target="_blank">
                                             <svg width="20" height="16" viewBox="0 0 20 16" fill="none"
@@ -99,13 +99,17 @@
                                             </svg>
                                         </a>
                                     </li>
-                                    <li>
+                                    <li class="social__gumroad-wrapper">
                                         <a class="social__item social__gumroad" href="https://djdestruct305.gumroad.com"
                                            target="_blank">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"
-                                                 viewBox="0 0 24 24">
-                                                <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12a12 12 0 0 0 12-12A12 12 0 0 0 12 0Zm-.007 5.12c4.48 0 5.995 3.025 6.064 4.744h-3.239c-.069-.962-.897-2.406-2.896-2.406c-2.136 0-3.514 1.857-3.514 4.126c0 2.27 1.378 4.125 3.514 4.125c1.93 0 2.758-1.512 3.103-3.025h-3.103v-1.238h6.509v6.327h-2.855v-3.989c-.207 1.444-1.102 4.264-4.617 4.264c-3.516 0-5.584-2.82-5.584-6.326c0-3.645 2.276-6.602 6.618-6.602z"
-                                                      fill="#fff" fill-rule="evenodd"/>
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="icon icon-tabler icon-tabler-brand-gumroad" width="24"
+                                                 height="24"
+                                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                                 stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M21 12a9 9 0 1 1 -18 0a9 9 0 0 1 18 0z"/>
+                                                <path d="M13.5 13h2.5v3"/>
+                                                <path d="M15.024 9.382a4 4 0 1 0 -3.024 6.618c1.862 0 2.554 -1.278 3 -3"/>
                                             </svg>
                                         </a>
                                     </li>
@@ -657,118 +661,114 @@
                             gatherings to high-energy nights out, DJ Destruct
                             sets the perfect vibe for every Miami occasion.
                         </p>
-                        <div class="book__cards">
-                            <div class="book__card book__card-private">
-                                <h2 class="book__card-title">Private Party</h2>
-                                <div class="book__hover">
-                                    <h3 class="book__hover-title">Private</h3>
-                                    <h3 class="book__hover-title book__hover-title-1">Party</h3>
-                                    <div class="book__hover-content row">
-                                        <div class="book__hover-text col-5">
-                                            <p>
-                                                DJ Destruct brings the music, energy, and
-                                                vibes to keep your guests dancing and
-                                                having a great time.
-                                            </p>
-                                            <p class="book__hover-link">
-                                                <a class="link link__reset"
-                                                   href="https://www.mixcloud.com/DJDestruct305/"
-                                                   target="_blank">
-                                                    Music
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                         fill="rgba(255,255,255,1)">
-                                                        <path d="M12 4C7.58172 4 4 7.58172 4 12H7C8.10457 12 9 12.8954 9 14V19C9 20.1046 8.10457 21 7 21H4C2.89543 21 2 20.1046 2 19V12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12V19C22 20.1046 21.1046 21 20 21H17C15.8954 21 15 20.1046 15 19V14C15 12.8954 15.8954 12 17 12H20C20 7.58172 16.4183 4 12 4ZM4 14V19H7V14H4ZM17 14V19H20V14H17Z"></path>
-                                                    </svg>
-                                                </a>
-                                            </p>
+                        <div class="slider-overflow-wrapper">
+                            <div class="book__cards">
+                                <div class="book__cards-wrapper">
+                                    <div class="book__card book__card-private">
+                                        <h3 class="book__hover-title">Private Party</h3>
+                                        <div class="book__hover-content row">
+                                            <div class="book__hover-text col-6">
+                                                <p>
+                                                    Book R&B DJ in Miami for your next event!
+                                                    DJ Destruct brings smooth vibes and personal
+                                                    equipment.
+                                                </p>
+                                                <p class="book__hover-link">
+                                                    <a class="link link__reset"
+                                                       href="https://www.mixcloud.com/DJDestruct305/"
+                                                       target="_blank">
+                                                        Listen Music
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                             fill="rgba(255,255,255,1)">
+                                                            <path d="M12 4C7.58172 4 4 7.58172 4 12H7C8.10457 12 9 12.8954 9 14V19C9 20.1046 8.10457 21 7 21H4C2.89543 21 2 20.1046 2 19V12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12V19C22 20.1046 21.1046 21 20 21H17C15.8954 21 15 20.1046 15 19V14C15 12.8954 15.8954 12 17 12H20C20 7.58172 16.4183 4 12 4ZM4 14V19H7V14H4ZM17 14V19H20V14H17Z"></path>
+                                                        </svg>
+                                                    </a>
+                                                </p>
+                                            </div>
+                                            <div class="book__hover-img-wrapper col-6">
+                                                <img src="{% static 'main/images/main/book-avatart01.png' %}"
+                                                     alt="black male with a headset">
+                                            </div>
                                         </div>
-                                        <div class="col-7 book__hover-img-wrapper">
-                                            <img src="{% static 'main/images/main/book-avatart01.png' %}"
-                                                 alt="black male with a headset">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-0 col-md 5">
-                                            <div style="height: 1px; visibility: hidden;"></div>
-                                        </div>
-                                        <ul class="col-sm-12 col-md-7">
-                                            <li class="book__info">
-                                                <p>Genre</p>
-                                                <span>Rnb</span>
-                                            </li>
-                                            <li class="book__info">
-                                                <p>Time</p>
-                                                <span>~2hr</span>
-                                            </li>
-                                            <li class="book__info">
-                                                <p>Equipment</p>
-                                                <span>Personal</span>
-                                            </li>
-                                            <li class="book__info">
-                                                <p>Location</p>
-                                                <span>South Florida</span>
-                                            </li>
-                                            <li>
-                                                <a class="cta-btn book__cta book__btn" href="#">Book</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="book__card book__card-live">
-                                <h2 class="book__card-title">Virtual Gig</h2>
-                                <div class="book__hover">
-                                    <h3 class="book__hover-title">Virtual</h3>
-                                    <h3 class="book__hover-title book__hover-title-1">Gig</h3>
-                                    <div class="book__hover-content row">
-                                        <div class="book__hover-text col-5">
-                                            <p>
-                                                Perfect for remote parties,
-                                                team events, or just vibing with
-                                                friends from anywhere.
-                                            </p>
-                                            <p class="book__hover-link">
-                                                <a class="link link__reset"
-                                                   href="https://www.mixcloud.com/DJDestruct305/"
-                                                   target="_blank">
-                                                    Music
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                         fill="rgba(255,255,255,1)">
-                                                        <path d="M12 4C7.58172 4 4 7.58172 4 12H7C8.10457 12 9 12.8954 9 14V19C9 20.1046 8.10457 21 7 21H4C2.89543 21 2 20.1046 2 19V12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12V19C22 20.1046 21.1046 21 20 21H17C15.8954 21 15 20.1046 15 19V14C15 12.8954 15.8954 12 17 12H20C20 7.58172 16.4183 4 12 4ZM4 14V19H7V14H4ZM17 14V19H20V14H17Z"></path>
-                                                    </svg>
-                                                </a>
-                                            </p>
-                                        </div>
-                                        <div class="col-7 book__hover-img-wrapper">
-                                            <img src="{% static 'main/images/main/book-avatart02.png' %}"
-                                                 alt="black male with a headset">
+                                        <div class="row">
+                                            <div class="col-sm-0 col-md 5">
+                                                <div style="height: 1px; visibility: hidden;"></div>
+                                            </div>
+                                            <ul class="col-12">
+                                                <li class="book__info">
+                                                    <p>Genre</p>
+                                                    <span>Rnb</span>
+                                                </li>
+                                                <li class="book__info">
+                                                    <p>Time</p>
+                                                    <span>~2hr</span>
+                                                </li>
+                                                <li class="book__info">
+                                                    <p>Equipment</p>
+                                                    <span>Personal</span>
+                                                </li>
+                                                <li class="book__info">
+                                                    <p>Location</p>
+                                                    <span>South Florida</span>
+                                                </li>
+                                                <li>
+                                                    <a class="cta-btn book__cta book__btn" href="#">Book</a>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-0 col-md 5">
-                                            <div style="height: 1px; visibility: hidden;"></div>
+                                    <div class="book__card book__card-live">
+                                        <h3 class="book__hover-title">Online Party</h3>
+                                        <div class="book__hover-content row">
+                                            <div class="book__hover-text col-6">
+                                                <p>
+                                                    Perfect for remote parties, team events,
+                                                    or vibing with friends—DJ Destruct brings
+                                                    the energy anywhere you are!
+                                                </p>
+                                                <p class="book__hover-link">
+                                                    <a class="link link__reset"
+                                                       href="https://www.mixcloud.com/DJDestruct305/"
+                                                       target="_blank">
+                                                        Listen Music
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                             fill="rgba(255,255,255,1)">
+                                                            <path d="M12 4C7.58172 4 4 7.58172 4 12H7C8.10457 12 9 12.8954 9 14V19C9 20.1046 8.10457 21 7 21H4C2.89543 21 2 20.1046 2 19V12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12V19C22 20.1046 21.1046 21 20 21H17C15.8954 21 15 20.1046 15 19V14C15 12.8954 15.8954 12 17 12H20C20 7.58172 16.4183 4 12 4ZM4 14V19H7V14H4ZM17 14V19H20V14H17Z"></path>
+                                                        </svg>
+                                                    </a>
+                                                </p>
+                                            </div>
+                                            <div class="book__hover-img-wrapper col-6">
+                                                <img src="{% static 'main/images/main/book-avatart02.png' %}"
+                                                     alt="black male with a headset">
+                                            </div>
                                         </div>
-                                        <ul class="col-sm-12 col-md-7">
-                                            <li class="book__info">
-                                                <p>Genre</p>
-                                                <span>Rnb</span>
-                                            </li>
-                                            <li class="book__info">
-                                                <p>Time</p>
-                                                <span>~2hr</span>
-                                            </li>
-                                            <li class="book__info">
-                                                <p>Equipment</p>
-                                                <span>Personal</span>
-                                            </li>
-                                            <li class="book__info">
-                                                <p>Platform</p>
-                                                <span>TikTok/Youtube</span>
-                                            </li>
-                                            <li>
-                                                <a class="cta-btn book__cta book__btn" href="#">Book</a>
-                                            </li>
-                                        </ul>
+                                        <div class="book_information row">
+                                            <div class="col-sm-0 col-md 5">
+                                                <div style="height: 1px; visibility: hidden;"></div>
+                                            </div>
+                                            <ul class="col-12">
+                                                <li class="book__info">
+                                                    <p>Genre</p>
+                                                    <span>Rnb</span>
+                                                </li>
+                                                <li class="book__info">
+                                                    <p>Time</p>
+                                                    <span>~2hr</span>
+                                                </li>
+                                                <li class="book__info">
+                                                    <p>Platform</p>
+                                                    <span>YouTube/TikTok</span>
+                                                </li>
+                                                <li class="book__info">
+                                                    <p>Location</p>
+                                                    <span>South Florida</span>
+                                                </li>
+                                                <li>
+                                                    <a class="cta-btn book__cta book__btn" href="#">Book</a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -818,7 +818,7 @@
                             <a class="footer__social-item" id="footer__mix-cloud"
                                href="https://www.mixcloud.com/DJDestruct305"
                                target="_blank">
-                                <svg width="52" height="17" viewBox="0 0 52 17" fill="none"
+                                <svg width="52" height="17" viewBox="-2 0 52 17" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M17.3062 16.0205H14.6087V3.44482L15.1125 1.65186H14.2431L11.1394 16.0205H6.18312L3.06312 1.65186H2.21812L2.6975 3.44482V16.0205H0V0.946289H5.33812L8.30375 15.3149H8.99437L11.9681 0.946289H17.3062V16.0205ZM44.2406 10.791L37.245 15.9458V12.7749L43.1681 8.4834L37.245 4.18359V1.021L44.2406 6.19238H44.9881L52 1.021V4.18359L46.0606 8.4834L52 12.7749V15.9458L44.9881 10.791H44.2406ZM34.9537 9.85303H20.1581V7.11377H34.9537V9.85303Z"
                                           fill="white"/>
@@ -826,7 +826,8 @@
                             </a>
                         </li>
                         <li>
-                            <a class="footer__social-item" href="https://www.youtube.com/djdestruct305"
+                            <a class="footer__social-item" id="footer__youtube"
+                               href="https://www.youtube.com/djdestruct305"
                                target="_blank">
                                 <svg width="20" height="16" viewBox="0 0 20 16" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
@@ -836,12 +837,16 @@
                             </a>
                         </li>
                         <li>
-                            <a class="footer__social-item footer__gum-road"
+                            <a class="footer__gum-road"
                                href="https://djdestruct305.gumroad.com"
                                target="_blank">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24">
-                                    <path fill="currentColor"
-                                          d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12a12 12 0 0 0 12-12A12 12 0 0 0 12 0Zm-.007 5.12c4.48 0 5.995 3.025 6.064 4.744h-3.239c-.069-.962-.897-2.406-2.896-2.406c-2.136 0-3.514 1.857-3.514 4.126c0 2.27 1.378 4.125 3.514 4.125c1.93 0 2.758-1.512 3.103-3.025h-3.103v-1.238h6.509v6.327h-2.855v-3.989c-.207 1.444-1.102 4.264-4.617 4.264c-3.516 0-5.584-2.82-5.584-6.326c0-3.645 2.276-6.602 6.618-6.602z"/>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="icon icon-tabler icon-tabler-brand-gumroad" width="24" height="24"
+                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 12a9 9 0 1 1 -18 0a9 9 0 0 1 18 0z"/>
+                                    <path d="M13.5 13h2.5v3"/>
+                                    <path d="M15.024 9.382a4 4 0 1 0 -3.024 6.618c1.862 0 2.554 -1.278 3 -3"/>
                                 </svg>
                             </a>
                         </li>

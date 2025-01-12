@@ -132,7 +132,7 @@ img {
     width: 100%;
     transform: scaleX(0) scaleY(1);
     height: 0.1em;
-    bottom: 0;
+    bottom: -1px;
     left: 0;
     background: currentcolor;
     transform-origin: bottom right;

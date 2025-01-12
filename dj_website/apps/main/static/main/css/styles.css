@@ -252,7 +252,7 @@ nav ul {
     justify-content: space-between;
     align-items: center;
     gap: 14px;
-    padding: 23px 20px;
+    padding: 17px;
     border-radius: 10px;
     background-color: var(--main-dark);
     clip-path: inset(0 0 100% 0);
@@ -272,8 +272,25 @@ nav ul {
     display: block;
 }
 
+#social__youtube-wrapper {
+    width: 24px;
+}
+
 .social__gumroad {
-    width: 20px;
+    width: 27px;
+    height: 27px;
+}
+
+.social__gumroad svg path {
+    fill: none;
+    color: var(--supportive-one);
+
+}
+
+.social__gumroad svg:hover path {
+    fill: none;
+    transition: color .4s ease;
+    color: #f23038;
 }
 
 .header__menu-wrapper {
@@ -739,12 +756,12 @@ header {
 
 .music__image-wrapper {
     position: relative;
-    border-radius: 5px;
     width: 250px;
     height: 250px;
 }
 
 .music__image-wrapper img {
+    border-radius: 6px;
     width: 100%;
     height: 100%;
 }
@@ -1186,19 +1203,37 @@ header {
     color: var(--supportive-one);
 }
 
-.book__card:not(:last-child) {
-    margin-bottom: 48px;
+.book__cards {
+    overflow-x: auto;
+    -ms-overflow-style: none;
+}
+
+.book__cards::-webkit-scrollbar {
+    display: none;
+}
+
+.book__cards-wrapper {
+    display: flex;
+    gap: 24px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    padding-right: 300px;
+    scroll-behavior: smooth;
+}
+
+.book__cards .book__cards-wrapper:active {
+    cursor: grabbing;
 }
 
 .book__card {
-    position: relative;
-    width: 100%;
-    height: 850px;
+    flex: 0 0 auto;
+    padding: 30px;
     background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     border-radius: 5px;
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
 }
 
 .book__card-private {
@@ -1211,23 +1246,20 @@ header {
     background-size: cover;
 }
 
-.book__card-title {
-    font-size: 72px;
-    color: var(--main-primary);
-}
-
-.book__hover {
-    opacity: 0;
-    visibility: hidden;
+.book__card-private::after, .book__card-live::after {
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    padding: 30px;
-    background-color: var(--main-secondary);
-    border-radius: 5px;
-    z-index: 1;
+    backdrop-filter: blur(15px);
+    z-index: -1;
+}
+
+.book__card-title {
+    font-size: 72px;
+    color: var(--main-primary);
 }
 
 .book__hover-title {
@@ -1235,11 +1267,7 @@ header {
     font-size: 80px;
     line-height: 1;
     letter-spacing: .1rem;
-    color: var(--main-light);
-}
-
-.book__hover-title-1 {
-    text-align: right;
+    color: var(--main-primary);
 }
 
 .book__hover-content {
@@ -1247,10 +1275,12 @@ header {
     margin-bottom: 32px;
 }
 
-.book__hover-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.book_information {
+    margin-top: auto;
+}
+
+.book__hover-text p:first-child {
+    margin-bottom: 18px;
 }
 
 .book__hover-link {
@@ -1277,7 +1307,13 @@ header {
 }
 
 .book__hover-img-wrapper {
+    display: flex;
+    justify-content: flex-end;
     filter: grayscale(100%);
+}
+
+.book__hover-img-wrapper img {
+    max-width: 250px;
 }
 
 .book__info {
@@ -1316,7 +1352,8 @@ header {
 }
 
 .book__info p {
-    font-size: 24px;
+    line-height: 1;
+    font-size: 16px;
 }
 
 
@@ -1388,8 +1425,8 @@ header {
 }
 
 .footer__social-item svg {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
 }
 
 #footer__mix-cloud svg {
@@ -1405,9 +1442,20 @@ header {
     fill: var(--main-primary);
 }
 
+.footer__gum-road svg path {
+    fill: none;
+    color: #f23038;
+}
+
 .socials__footer svg:hover path {
     transition: fill .4s ease;
     fill: var(--supportive-one);
+}
+
+.footer__gum-road svg:hover path {
+    fill: none;
+    transition: color .4s ease;
+    color: var(--supportive-one);
 }
 
 .social__item svg {
@@ -1523,6 +1571,22 @@ header {
         font-size: 14px;
         font-weight: 600;
     }
+
+    /* Booking */
+    .book__hover-title {
+        margin-bottom: 18px;
+        font-size: 42px;
+    }
+
+    /* Footer */
+    .footer__social-item svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    #footer__mix-cloud svg {
+        width: 100px;
+    }
 }
 
 @media (max-width: 767.98px) {
@@ -1569,7 +1633,6 @@ header {
     }
 
     .socials {
-        flex-direction: column;
         padding: 15px;
     }
 
@@ -1594,27 +1657,32 @@ header {
         display: block;
     }
 
-    .social__mix-cloud {
-        transform: rotate(90deg);
+    #social__youtube-wrapper {
         width: 30px;
-        height: 50px;
+    }
+
+    .social__mix-cloud {
+        width: 50px;
+        height: 30px;
     }
 
     #social__mix-cloud-wrapper {
+        width: 70px;
+        height: 30px;
         align-items: baseline;
-        height: 75px
     }
 
     .social__mix-cloud {
-        width: 37px;
+        width: 70px;
     }
 
     .social__mix-cloud svg {
         width: 70px;
     }
 
-    .social__gumroad svg {
-        width: 25px;
+    li.social__gumroad-wrapper {
+        width: 31px;
+        height: 31px;
     }
 
     /* Live stream */
@@ -1725,6 +1793,7 @@ header {
     }
 
     .music__avatar {
+        display: none;
         right: 12px;
     }
 
@@ -1857,7 +1926,10 @@ header {
     }
 
     .book__card {
-        height: 75vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 20px;
     }
 
     .book__card-title {
@@ -1876,15 +1948,6 @@ header {
         margin-bottom: 18px;
     }
 
-    .book__hover-title {
-        margin-bottom: 18px;
-        font-size: 42px;
-    }
-
-    .book__hover-title-1 {
-        font-size: 42px;
-    }
-
     .book__info:not(:last-child) {
         margin-bottom: 16px;
     }
@@ -1893,8 +1956,9 @@ header {
         margin-bottom: 24px;
     }
 
-    .book__info p {
-        font-size: 16px;
+    .book__hover-img-wrapper img {
+        display: inline-block;
+        max-width: 100px;
     }
 
     /* Footer */
@@ -1938,14 +2002,18 @@ header {
         height: 30px;
     }
 
+    #footer__youtube svg {
+        width: 35px;
+    }
+
+    .socials__footer .footer__gum-road svg {
+        width: 35px;
+        height: 35px;
+    }
+
     #footer__mix-cloud svg {
         display: inline-block;
         width: 100px;
-    }
-
-    .footer__gum-road {
-        width: 40px;
-        height: 40px;
     }
 
     .footer__bottom {
@@ -1967,107 +2035,111 @@ header {
         margin-top: 32px;
         font-size: 18px;
     }
+}
 
-    @media (max-width: 575.98px) {
-        /* Globals */
-        .main-button {
-            font-size: 14px;
-        }
-
-        .section__text {
-            font-size: 20px;
-            line-height: 1.5;
-        }
-
-        /* Preloader */
-        .preloader h2 {
-            font-size: 2rem;
-        }
-
-        /* Hero */
-        .hero {
-            margin-bottom: 48px;
-        }
-
-        .header__menu {
-            color: var(--main-primary);
-        }
-
-        .hero__wrapper {
-            height: 90vh;
-            padding: 0 12px;
-        }
-
-        .hero__music-section {
-            display: none;
-        }
-
-        .hero__content h1 {
-            font-size: 60px;
-        }
-
-        /* Menu */
-        .menu {
-            padding-bottom: 12px;
-        }
-
-        .menu__avatar-wrapper, .menu__avatar {
-            display: none;
-        }
-
-        .menu__content {
-            justify-content: space-between;
-        }
-
-        .menu__decor {
-            padding-top: 62px;
-        }
-
-        /* Live stream */
-        .live-stream {
-            margin-bottom: 48px;
-        }
-
-        .live-stream__title {
-            margin-bottom: 0;
-        }
-
-        .live-stream__card-title {
-            font-size: 24px;
-            margin-bottom: 24px;
-        }
-
-        .live-stream__buttons {
-            flex-wrap: wrap;
-        }
-
-        /* Slider text */
-        .slider__wrapper {
-            margin-bottom: 48px;
-        }
-
-        .slider p {
-            font-size: 120px;
-        }
-
-        /* Book */
-        .book__hover-img-wrapper img {
-            width: 100%;
-        }
+@media (max-width: 575.98px) {
+    /* Globals */
+    .main-button {
+        font-size: 14px;
     }
 
-    @media (max-width: 420px) {
-        .music__avatar {
-            position: relative;
-            right: 0;
-            margin-bottom: 12px;
-        }
+    .section__text {
+        font-size: 20px;
+        line-height: 1.5;
     }
 
-    @media (prefers-reduced-motion: no-preference) {
-        .music__yt-slider {
-            transition: margin-right 0.3s ease;
-        }
+    /* Preloader */
+    .preloader h2 {
+        font-size: 2rem;
+    }
+
+    /* Hero */
+    .hero {
+        margin-bottom: 48px;
+    }
+
+    .header__menu {
+        color: var(--main-primary);
+    }
+
+    .hero__wrapper {
+        height: 90vh;
+        padding: 0 12px;
+    }
+
+    .hero__music-section {
+        display: none;
+    }
+
+    .hero__content h1 {
+        font-size: 60px;
+    }
+
+    /* Menu */
+    .menu {
+        padding-bottom: 12px;
+    }
+
+    .menu__avatar-wrapper, .menu__avatar {
+        display: none;
+    }
+
+    .menu__content {
+        justify-content: space-between;
+    }
+
+    .menu__decor {
+        padding-top: 62px;
+    }
+
+    /* Live stream */
+    .live-stream {
+        margin-bottom: 48px;
+    }
+
+    .live-stream__title {
+        margin-bottom: 0;
+    }
+
+    .live-stream__card-title {
+        font-size: 24px;
+        margin-bottom: 24px;
+    }
+
+    .live-stream__buttons {
+        flex-wrap: wrap;
+    }
+
+    /* Slider text */
+    .slider__wrapper {
+        margin-bottom: 48px;
+    }
+
+    .slider p {
+        font-size: 120px;
+    }
+
+    /* About */
+    .music__avatar {
+        display: block;
+    }
+}
+
+@media (max-width: 420px) {
+    .music__avatar {
+        position: relative;
+        right: 0;
+        margin-bottom: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .music__yt-slider {
+        transition: margin-right 0.3s ease;
+    }
+
+    .book__cards {
+        transition: margin-right 0.3s ease;
     }
 }
 

@@ -447,8 +447,7 @@ aboutMM.add('(min-width: 768px)', () => {
         scrollTrigger: {
             trigger: '.about',
             start: 'clamp(top+=500)',
-            toggleActions: 'play none none none',
-            markers: true
+            toggleActions: 'play none none none'
         },
     });
 
@@ -1112,30 +1111,6 @@ function navigateImages(direction) {
     updateThumbnailHighlight(currentIndex);
 }
 
-document.querySelectorAll('.book__card').forEach(card => {
-    const hoverContent = card.querySelector('.book__hover');
-
-    // Mouse enter animation
-    card.addEventListener('mouseenter', () => {
-        gsap.to(hoverContent, {
-            opacity: 1,
-            visibility: "visible",
-            duration: 0.5,
-            ease: "power2.out",
-        });
-    });
-
-    // Mouse leave animation
-    card.addEventListener('mouseleave', () => {
-        gsap.to(hoverContent, {
-            opacity: 0,
-            visibility: "hidden",
-            duration: 0.5,
-            ease: "power2.in",
-        });
-    });
-});
-
 // Booking
 // ====================================
 const bookingTitle = document.querySelector('.live-stream__title.book__header');
@@ -1209,6 +1184,77 @@ tlBooking.fromTo(
     },
     '+=0.2'
 );
+
+const bookSlider = document.querySelector('.book__cards-wrapper');
+
+let bookingIsDragging = false;
+let bookingStartX, bookingScrollLeft, bookingDragStartTime;
+let bookingMovedDuringDrag = false;
+
+bookSlider.addEventListener('mousedown', (e) => {
+    bookingIsDragging = true;
+    bookingDragStartTime = Date.now();
+    bookingMovedDuringDrag = false;
+    bookSlider.classList.add('active');
+    bookingStartX = e.pageX - bookSlider.offsetLeft;
+    bookingScrollLeft = bookSlider.scrollLeft;
+
+});
+
+// Mouse Leave: Stop Dragging
+bookSlider.addEventListener('mouseleave', () => {
+    bookingIsDragging = false;
+    bookSlider.classList.remove('active');
+});
+
+// Mouse Up: Stop Dragging
+bookSlider.addEventListener('mouseup', (e) => {
+    const dragDuration = Date.now() - bookingDragStartTime;
+
+    if (bookingMovedDuringDrag || dragDuration > CLICK_THRESHOLD) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Prevent the next click event
+        const preventNextClick = (clickEvent) => {
+            clickEvent.preventDefault();
+            clickEvent.stopPropagation();
+            bookSlider.removeEventListener('click', preventNextClick, true);
+        };
+
+        bookSlider.addEventListener('click', preventNextClick, true);
+    }
+
+    bookingIsDragging = false;
+    bookSlider.classList.remove('active');
+});
+
+// Mouse Move: Scroll While Dragging
+bookSlider.addEventListener('mousemove', (e) => {
+    if (!bookingIsDragging) return;
+    e.preventDefault();
+
+    const x = e.pageX - bookSlider.offsetLeft;
+    const walk = (x - bookingStartX) * 2;
+
+    if (Math.abs(walk) > DRAG_THRESHOLD) {
+        bookingMovedDuringDrag = true;
+    }
+    bookSlider.scrollLeft = bookingScrollLeft - walk;
+});
+
+// Prevent Text Selection While Dragging
+bookSlider.addEventListener('dragstart', (e) => e.preventDefault());
+
+// Handle clicks
+bookSlider.addEventListener('click', (e) => {
+    if (bookingMovedDuringDrag) {
+        e.preventDefault();
+        e.stopPropagation();
+        bookingMovedDuringDrag = false;
+    }
+});
+
 
 
 // Footer
