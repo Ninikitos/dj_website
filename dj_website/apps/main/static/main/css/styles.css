@@ -283,7 +283,7 @@ nav ul {
 
 .social__gumroad svg path {
     fill: none;
-    color: var(--supportive-one);
+    color: var(--main-light);
 
 }
 
@@ -2132,6 +2132,20 @@ header {
         position: relative;
         right: 0;
         margin-bottom: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .socials {
+        flex-direction: column;
+    }
+
+    #social__mix-cloud-wrapper {
+        display: flex;
+        align-items: center;
+        width: 25px;
+        height: 70px;
+        transform: rotate(90deg);
     }
 }
 
