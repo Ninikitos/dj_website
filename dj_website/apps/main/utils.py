@@ -6,7 +6,7 @@ from datetime import datetime
 from TikTokLive import TikTokLiveClient
 
 YOUTUBE_API_KEY = config('YOUTUBE_API_KEY')
-CHANNEL_ID = 'UCSJ4gkVC6NrvII8umztf0Ow'
+CHANNEL_ID = 'UCpSU8Myul1TknsIzpsGxitg'
 
 
 async def is_user_live(username):

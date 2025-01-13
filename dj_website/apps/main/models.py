@@ -118,3 +118,12 @@ class ProductImage(models.Model):
     class Meta:
         verbose_name = "Product Image"
         verbose_name_plural = "Product Images"
+
+
+class AudioSample(models.Model):
+    title = models.CharField(max_length=255, help_text="Enter a title for the audio file sample", blank=True, null=True)
+    audio_file = models.FileField(upload_to='audio_samples/', help_text="Upload an audio file")
+
+    def __str__(self):
+        return self.title
+

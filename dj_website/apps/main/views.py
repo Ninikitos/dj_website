@@ -17,13 +17,14 @@ def index(request):
     youtube_content = YoutubeContent.objects.all()
     music_content = list(MusicContent.objects.all())
     music_content_first = music_content[0] if music_content else None
-    products = Product.objects.all()
+    products = Product.objects.prefetch_related('product_images').all()
+    audio_samples = AudioSample.objects.all()
 
     # Check live status for Wednesday and Sunday
-    username = 'olsonparker'
+    username = 'djdestruct305'
     wednesday_live, sunday_live = check_live_status(username)
     # youtube_live_url = check_youtube_live()
-    youtube_live_url = ''
+    youtube_live_url = 'https://www.youtube.com/embed/jfKfPfyJRdk'
 
     context = {
         'main_page_urls': main_page_urls,
@@ -35,7 +36,8 @@ def index(request):
         'wednesday_live': wednesday_live,
         'sunday_live': sunday_live,
         'username': username,
-        'youtube_live_url': youtube_live_url
+        'youtube_live_url': youtube_live_url,
+        'audio_samples': audio_samples
     }
 
     return render(request, 'main/index.html', context)

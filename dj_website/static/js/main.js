@@ -1,4 +1,4 @@
-import { disableScrolling, enableScrolling } from './lenis-setup.js';
+import {disableScrolling, enableScrolling} from './lenis-setup.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     gsap.registerPlugin(ScrollTrigger);
@@ -70,6 +70,30 @@ document.addEventListener("DOMContentLoaded", () => {
             .to(heroMusicListenAll, {
                 duration: 1, opacity: 1, x: 0, ease: 'power2.inOut'
             }, '-=2');
+    });
+
+    // Play audio samples if a stream is live.
+    let currentAudio = null;
+    const buttons = document.querySelectorAll(".music-button");
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            // Pause the current audio if one is playing
+            if (currentAudio) {
+                currentAudio.pause();
+            }
+
+            // Create a new Audio object for the selected file
+            const audioSrc = button.getAttribute("data-audio");
+            currentAudio = new Audio(audioSrc);
+
+            // Play the audio
+            currentAudio.play();
+
+            // Add event listener to reset `currentAudio` when playback ends
+            currentAudio.addEventListener("ended", () => {
+                currentAudio = null;
+            });
+        });
     });
 });
 

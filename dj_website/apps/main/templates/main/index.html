@@ -312,12 +312,24 @@
                     </div>
                 </div>
                 {% if youtube_live_url %}
-                    <p>{{ youtube_live_url }}</p>
                     <div class="live-stream__youtube">
                         <iframe width="100%" height="600px" src="{{ youtube_live_url }}"
                                 title="YouTube video player" frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="music-player">
+                        <div class="music-player__buttons">
+                            {% for sample in audio_samples %}
+                                <button class="music-button" data-audio="{{ sample.audio_file.url }}">{{ sample.title }}</button>
+                            {% endfor %}
+                        </div>
+                        <div class="music-player__buy-wrapper">
+                            <a class="music-player__link" href="https://djdestruct305.gumroad.com/?recommended_by=search"
+                               target="_blank">
+                                BUY SAMPLES
+                            </a>
+                        </div>
                     </div>
                 {% endif %}
             </div>
@@ -382,7 +394,8 @@
                                     <p>Online/Private</p>
                                 </li>
                                 <li>
-                                    <a class="cta-btn about-cta" id="about-cta" href="#">Book</a>
+                                    <a class="cta-btn about-cta" id="about-cta"
+                                       href="{{ main_page_urls.general_booking }}">Book</a>
                                 </li>
                             </ul>
                         </div>
@@ -712,7 +725,9 @@
                                                     <span>South Florida</span>
                                                 </li>
                                                 <li>
-                                                    <a class="cta-btn book__cta book__btn" href="#">Book</a>
+                                                    <a class="cta-btn book__cta book__btn"
+                                                       href="{{ main_page_urls.party_booking }}"
+                                                       target="_blank">Book</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -765,7 +780,8 @@
                                                     <span>South Florida</span>
                                                 </li>
                                                 <li>
-                                                    <a class="cta-btn book__cta book__btn" href="#">Book</a>
+                                                    <a class="cta-btn book__cta book__btn"
+                                                       href="{{ main_page_urls.live_booking }}" target="_blank">Book</a>
                                                 </li>
                                             </ul>
                                         </div>

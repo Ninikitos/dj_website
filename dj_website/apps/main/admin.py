@@ -33,5 +33,10 @@ class YoutubeLinkAdmin(admin.ModelAdmin):
     list_display = ('link',)
 
 
+@admin.register(AudioSample)
+class AudioSampleAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+
+
 
 

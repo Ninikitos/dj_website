@@ -518,6 +518,57 @@ header {
     color: var(--supportive-one);
     background-color: var(--supportive-two);
 }
+.live-stream__youtube {
+    margin-top: 32px;
+}
+
+.music-player {
+    text-align: center;
+    margin-top: 18px;
+}
+
+.music-player__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.music-button {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    font-size: 24px;
+    padding: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+}
+
+.music-button:hover {
+    background-color: #b71c1c;
+}
+
+.music-player__buy-wrapper {
+    margin-top: 10px;
+}
+
+.music-player__link {
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(to right, #ff416c, #3b82f6);
+    border-radius: 8px;
+    transition: opacity 0.3s;
+}
+
+.music-player__link:hover {
+    opacity: 0.8;
+}
 
 /* Slider text */
 .slider-items {
